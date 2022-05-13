@@ -120,12 +120,17 @@
 		6B8B7B18282D54570066DCD4 /* SportsApp */ = {
 			isa = PBXGroup;
 			children = (
+				8F079965282E94FD00690A58 /* LocalDB */,
+				8F079964282E94F400690A58 /* Network */,
+				8F079963282E94E900690A58 /* View */,
+				8F079962282E94D100690A58 /* TeamDetails */,
+				8F079961282E94C400690A58 /* LeagueDetails */,
+				8F079960282E94B900690A58 /* AllLeagues */,
+				8F07995F282E94A900690A58 /* AllSports */,
 				6B8B7B19282D54570066DCD4 /* AppDelegate.swift */,
 				6B8B7B1B282D54570066DCD4 /* SceneDelegate.swift */,
 				6B8B7B22282D545A0066DCD4 /* Assets.xcassets */,
-				6B8B7B27282D545A0066DCD4 /* LaunchScreen.storyboard */,
 				6B8B7B2A282D545A0066DCD4 /* Info.plist */,
-				8F079957282E8EBB00690A58 /* Main.storyboard */,
 				8F079959282E8FC000690A58 /* ViewController.swift */,
 				6B8B7B1D282D54570066DCD4 /* SportsApp.xcdatamodeld */,
 				6B8B7B24282D545A0066DCD4 /* Preview Content */,
@@ -167,6 +172,153 @@
 				83991B289E8252356B0B84BC /* Pods_SportsAppTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F07995F282E94A900690A58 /* AllSports */ = {
+			isa = PBXGroup;
+			children = (
+				8F079968282E955300690A58 /* View */,
+				8F079967282E954A00690A58 /* Presenter */,
+				8F079966282E954300690A58 /* Model */,
+			);
+			path = AllSports;
+			sourceTree = "<group>";
+		};
+		8F079960282E94B900690A58 /* AllLeagues */ = {
+			isa = PBXGroup;
+			children = (
+				8F07996B282E956B00690A58 /* Model */,
+				8F07996A282E956300690A58 /* Presenter */,
+				8F079969282E955A00690A58 /* View */,
+			);
+			path = AllLeagues;
+			sourceTree = "<group>";
+		};
+		8F079961282E94C400690A58 /* LeagueDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8F07996E282E957F00690A58 /* View */,
+				8F07996D282E957700690A58 /* Presenter */,
+				8F07996C282E957200690A58 /* Model */,
+			);
+			path = LeagueDetails;
+			sourceTree = "<group>";
+		};
+		8F079962282E94D100690A58 /* TeamDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8F079971282E959700690A58 /* Model */,
+				8F079970282E958F00690A58 /* Presenter */,
+				8F07996F282E958500690A58 /* View */,
+			);
+			path = TeamDetails;
+			sourceTree = "<group>";
+		};
+		8F079963282E94E900690A58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8F079957282E8EBB00690A58 /* Main.storyboard */,
+				6B8B7B27282D545A0066DCD4 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8F079964282E94F400690A58 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8F079965282E94FD00690A58 /* LocalDB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LocalDB;
+			sourceTree = "<group>";
+		};
+		8F079966282E954300690A58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8F079967282E954A00690A58 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8F079968282E955300690A58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8F079969282E955A00690A58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8F07996A282E956300690A58 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8F07996B282E956B00690A58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8F07996C282E957200690A58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8F07996D282E957700690A58 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8F07996E282E957F00690A58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8F07996F282E958500690A58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8F079970282E958F00690A58 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8F079971282E959700690A58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B47D56A9ACBC250A18D60CF7 /* Pods */ = {
