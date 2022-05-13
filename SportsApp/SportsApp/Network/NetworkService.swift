@@ -13,12 +13,11 @@ import Alamofire
 
 
 class NetworkService{
-  //  var baseUrl = ""
     
     func getResponse(completionHandler: @escaping ([Sport]?, Error?) -> ()) {
         
-        AF.request("www.thesportsdb.com/api/v1/json/2/all_sports.php", method: .get).responseDecodable(of: [Sport].self) { (response) in
-            print("result: \(response)")
+        /*AF.request("www.thesportsdb.com/api/v1/json/2/all_sports.php", method: .get).responseDecodable(of: [Sport].self) { (response) in
+            //print("result: \(response)")
             
             let result = response.result
             switch result {
@@ -30,6 +29,12 @@ class NetworkService{
                 completionHandler(nil, error)
             }
             
+        }*/
+        AF.request("https://www.thesportsdb.com/api/v1/json/2/all_sports.php")
+        .validate()
+        .responseDecodable(of: AllSports.self) { (response) in
+          guard let allSports = response.value else { return }
+            print(allSports.sports.count)
         }
     }
     

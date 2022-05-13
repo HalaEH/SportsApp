@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class ViewController: UIViewController {
 
     let networkService: NetworkService = NetworkService()
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
              })
          }
          */
-        networkService.getResponse(completionHandler: { [weak self] sports, error in
+        /*networkService.getResponse(completionHandler: { [weak self] sports, error in
             print("Completion Handler")
             guard let self = self else {return}
             if let error = error{
@@ -51,6 +51,13 @@ class ViewController: UIViewController {
                 print("ELSEEE")
             }
         })
+        print(sports)*/
+        AF.request("https://www.thesportsdb.com/api/v1/json/2/all_sports.php")
+        .validate()
+        .responseDecodable(of: AllSports.self) { (response) in
+          guard let allSports = response.value else { return }
+            print(allSports.sports)
+        }
         
 
         // Do any additional setup after loading the view.
