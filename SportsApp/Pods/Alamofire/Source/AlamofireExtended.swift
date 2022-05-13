@@ -46,16 +46,16 @@ public protocol AlamofireExtended {
     var af: AlamofireExtension<ExtendedType> { get set }
 }
 
-extension AlamofireExtended {
+public extension AlamofireExtended {
     /// Static Alamofire extension point.
-    public static var af: AlamofireExtension<Self>.Type {
-        get { AlamofireExtension<Self>.self }
+    static var af: AlamofireExtension<Self>.Type {
+        get { return AlamofireExtension<Self>.self }
         set {}
     }
 
     /// Instance Alamofire extension point.
-    public var af: AlamofireExtension<Self> {
-        get { AlamofireExtension(self) }
+    var af: AlamofireExtension<Self> {
+        get { return AlamofireExtension(self) }
         set {}
     }
 }

@@ -7,7 +7,8 @@ target 'SportsApp' do
 
   # Pods for SportsApp
   pod 'Kingfisher', '~> 6.0'
-  pod 'Alamofire', '~> 5.2-rc.2'
+  pod 'Alamofire', '~> 5.0.0-beta.6'
+
   target 'SportsAppTests' do
     inherit! :search_paths
     # Pods for testing

@@ -48,21 +48,15 @@ public final class URLEncodedFormEncoder {
         case brackets
         /// No brackets are appended to the key and the key is encoded as is.
         case noBrackets
-        /// Brackets containing the item index are appended. This matches the jQuery and Node.js behavior.
-        case indexInBrackets
 
         /// Encodes the key according to the encoding.
         ///
-        /// - Parameters:
-        ///     - key:      The `key` to encode.
-        ///     - index:   When this enum instance is `.indexInBrackets`, the `index` to encode.
-        ///
-        /// - Returns:          The encoded key.
-        func encode(_ key: String, atIndex index: Int) -> String {
+        /// - Parameter key: The `key` to encode.
+        /// - Returns:       The encoded key.
+        func encode(_ key: String) -> String {
             switch self {
             case .brackets: return "\(key)[]"
             case .noBrackets: return key
-            case .indexInBrackets: return "\(key)[\(index)]"
             }
         }
     }
@@ -211,11 +205,11 @@ public final class URLEncodedFormEncoder {
         }
 
         private func convertToSnakeCase(_ key: String) -> String {
-            convert(key, usingSeparator: "_")
+            return convert(key, usingSeparator: "_")
         }
 
         private func convertToKebabCase(_ key: String) -> String {
-            convert(key, usingSeparator: "-")
+            return convert(key, usingSeparator: "-")
         }
 
         private func convert(_ key: String, usingSeparator separator: String) -> String {
@@ -409,7 +403,7 @@ public final class URLEncodedFormEncoder {
 final class _URLEncodedFormEncoder {
     var codingPath: [CodingKey]
     // Returns an empty dictionary, as this encoder doesn't support userInfo.
-    var userInfo: [CodingUserInfoKey: Any] { [:] }
+    var userInfo: [CodingUserInfoKey: Any] { return [:] }
 
     let context: URLEncodedFormContext
 
@@ -441,19 +435,19 @@ extension _URLEncodedFormEncoder: Encoder {
     }
 
     func unkeyedContainer() -> UnkeyedEncodingContainer {
-        _URLEncodedFormEncoder.UnkeyedContainer(context: context,
-                                                codingPath: codingPath,
-                                                boolEncoding: boolEncoding,
-                                                dataEncoding: dataEncoding,
-                                                dateEncoding: dateEncoding)
+        return _URLEncodedFormEncoder.UnkeyedContainer(context: context,
+                                                       codingPath: codingPath,
+                                                       boolEncoding: boolEncoding,
+                                                       dataEncoding: dataEncoding,
+                                                       dateEncoding: dateEncoding)
     }
 
     func singleValueContainer() -> SingleValueEncodingContainer {
-        _URLEncodedFormEncoder.SingleValueContainer(context: context,
-                                                    codingPath: codingPath,
-                                                    boolEncoding: boolEncoding,
-                                                    dataEncoding: dataEncoding,
-                                                    dateEncoding: dateEncoding)
+        return _URLEncodedFormEncoder.SingleValueContainer(context: context,
+                                                           codingPath: codingPath,
+                                                           boolEncoding: boolEncoding,
+                                                           dataEncoding: dataEncoding,
+                                                           dateEncoding: dateEncoding)
     }
 }
 
@@ -501,7 +495,7 @@ enum URLEncodedFormComponent {
 
     /// Recursive backing method to `set(to:at:)`.
     private func set(_ context: inout URLEncodedFormComponent, to value: URLEncodedFormComponent, at path: [CodingKey]) {
-        guard !path.isEmpty else {
+        guard path.count >= 1 else {
             context = value
             return
         }
@@ -598,7 +592,7 @@ extension _URLEncodedFormEncoder {
         }
 
         private func nestedCodingPath(for key: CodingKey) -> [CodingKey] {
-            codingPath + [key]
+            return codingPath + [key]
         }
     }
 }
@@ -646,19 +640,19 @@ extension _URLEncodedFormEncoder.KeyedContainer: KeyedEncodingContainerProtocol 
     }
 
     func superEncoder() -> Encoder {
-        _URLEncodedFormEncoder(context: context,
-                               codingPath: codingPath,
-                               boolEncoding: boolEncoding,
-                               dataEncoding: dataEncoding,
-                               dateEncoding: dateEncoding)
+        return _URLEncodedFormEncoder(context: context,
+                                      codingPath: codingPath,
+                                      boolEncoding: boolEncoding,
+                                      dataEncoding: dataEncoding,
+                                      dateEncoding: dateEncoding)
     }
 
     func superEncoder(forKey key: Key) -> Encoder {
-        _URLEncodedFormEncoder(context: context,
-                               codingPath: nestedCodingPath(for: key),
-                               boolEncoding: boolEncoding,
-                               dataEncoding: dataEncoding,
-                               dateEncoding: dateEncoding)
+        return _URLEncodedFormEncoder(context: context,
+                                      codingPath: nestedCodingPath(for: key),
+                                      boolEncoding: boolEncoding,
+                                      dataEncoding: dataEncoding,
+                                      dateEncoding: dateEncoding)
     }
 }
 
@@ -784,9 +778,6 @@ extension _URLEncodedFormEncoder.SingleValueContainer: SingleValueEncodingContai
             }
 
             try encode(value, as: string)
-        case let decimal as Decimal:
-            // Decimal's `Encodable` implementation returns an object, not a single value, so override it.
-            try encode(value, as: String(describing: decimal))
         default:
             try attemptToEncode(value)
         }
@@ -811,7 +802,7 @@ extension _URLEncodedFormEncoder {
 
         var count = 0
         var nestedCodingPath: [CodingKey] {
-            codingPath + [AnyCodingKey(intValue: count)!]
+            return codingPath + [AnyCodingKey(intValue: count)!]
         }
 
         private let context: URLEncodedFormContext
@@ -936,8 +927,8 @@ final class URLEncodedFormSerializer {
     }
 
     func serialize(_ array: [URLEncodedFormComponent], forKey key: String) -> String {
-        var segments: [String] = array.enumerated().map { index, component in
-            let keyPath = arrayEncoding.encode(key, atIndex: index)
+        var segments: [String] = array.map { component in
+            let keyPath = arrayEncoding.encode(key)
             return serialize(component, forKey: keyPath)
         }
         segments = alphabetizeKeyValuePairs ? segments.sorted() : segments
@@ -957,11 +948,11 @@ final class URLEncodedFormSerializer {
 
 extension Array where Element == String {
     func joinedWithAmpersands() -> String {
-        joined(separator: "&")
+        return joined(separator: "&")
     }
 }
 
-extension CharacterSet {
+public extension CharacterSet {
     /// Creates a CharacterSet from RFC 3986 allowed characters.
     ///
     /// RFC 3986 states that the following characters are "reserved" characters.
@@ -972,7 +963,7 @@ extension CharacterSet {
     /// In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
     /// query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
     /// should be percent-escaped in the query string.
-    public static let afURLQueryAllowed: CharacterSet = {
+    static let afURLQueryAllowed: CharacterSet = {
         let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
         let subDelimitersToEncode = "!$&'()*+,;="
         let encodableDelimiters = CharacterSet(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")

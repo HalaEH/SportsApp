@@ -50,7 +50,11 @@ open class SessionDelegate: NSObject {
             return nil
         }
 
-        return provider.request(for: task) as? R
+        guard let request = provider.request(for: task) as? R else {
+            fatalError("Returned Request is not of expected type: \(R.self).")
+        }
+
+        return request
     }
 }
 
@@ -91,15 +95,11 @@ extension SessionDelegate: URLSessionTaskDelegate {
 
         let evaluation: ChallengeEvaluation
         switch challenge.protectionSpace.authenticationMethod {
-        case NSURLAuthenticationMethodHTTPBasic, NSURLAuthenticationMethodHTTPDigest, NSURLAuthenticationMethodNTLM,
-             NSURLAuthenticationMethodNegotiate:
-            evaluation = attemptCredentialAuthentication(for: challenge, belongingTo: task)
-        #if !(os(Linux) || os(Windows))
         case NSURLAuthenticationMethodServerTrust:
             evaluation = attemptServerTrustAuthentication(with: challenge)
-        case NSURLAuthenticationMethodClientCertificate:
+        case NSURLAuthenticationMethodHTTPBasic, NSURLAuthenticationMethodHTTPDigest, NSURLAuthenticationMethodNTLM,
+             NSURLAuthenticationMethodNegotiate, NSURLAuthenticationMethodClientCertificate:
             evaluation = attemptCredentialAuthentication(for: challenge, belongingTo: task)
-        #endif
         default:
             evaluation = (.performDefaultHandling, nil, nil)
         }
@@ -111,7 +111,6 @@ extension SessionDelegate: URLSessionTaskDelegate {
         completionHandler(evaluation.disposition, evaluation.credential)
     }
 
-    #if !(os(Linux) || os(Windows))
     /// Evaluates the server trust `URLAuthenticationChallenge` received.
     ///
     /// - Parameter challenge: The `URLAuthenticationChallenge`.
@@ -121,7 +120,7 @@ extension SessionDelegate: URLSessionTaskDelegate {
         let host = challenge.protectionSpace.host
 
         guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
-              let trust = challenge.protectionSpace.serverTrust
+            let trust = challenge.protectionSpace.serverTrust
         else {
             return (.performDefaultHandling, nil, nil)
         }
@@ -138,7 +137,6 @@ extension SessionDelegate: URLSessionTaskDelegate {
             return (.cancelAuthenticationChallenge, nil, error.asAFError(or: .serverTrustEvaluationFailed(reason: .customEvaluationFailed(error: error))))
         }
     }
-    #endif
 
     /// Evaluates the credential-based authentication `URLAuthenticationChallenge` received for `task`.
     ///
@@ -233,14 +231,12 @@ extension SessionDelegate: URLSessionDataDelegate {
     open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         eventMonitor?.urlSession(session, dataTask: dataTask, didReceive: data)
 
-        if let request = request(for: dataTask, as: DataRequest.self) {
-            request.didReceive(data: data)
-        } else if let request = request(for: dataTask, as: DataStreamRequest.self) {
-            request.didReceive(data: data)
-        } else {
-            assertionFailure("dataTask did not find DataRequest or DataStreamRequest in didReceive")
+        guard let request = request(for: dataTask, as: DataRequest.self) else {
+            assertionFailure("dataTask did not find DataRequest.")
             return
         }
+
+        request.didReceive(data: data)
     }
 
     open func urlSession(_ session: URLSession,
@@ -304,13 +300,11 @@ extension SessionDelegate: URLSessionDownloadDelegate {
             return
         }
 
-        let (destination, options): (URL, DownloadRequest.Options)
-        if let response = request.response {
-            (destination, options) = request.destination(location, response)
-        } else {
-            // If there's no response this is likely a local file download, so generate the temporary URL directly.
-            (destination, options) = (DownloadRequest.defaultDestinationURL(location), [])
+        guard let response = request.response else {
+            fatalError("URLSessionDownloadTask finished downloading with no response.")
         }
+
+        let (destination, options) = (request.destination)(location, response)
 
         eventMonitor?.request(request, didCreateDestinationURL: destination)
 
@@ -328,9 +322,7 @@ extension SessionDelegate: URLSessionDownloadDelegate {
 
             request.didFinishDownloading(using: downloadTask, with: .success(destination))
         } catch {
-            request.didFinishDownloading(using: downloadTask, with: .failure(.downloadedFileMoveFailed(error: error,
-                                                                                                       source: location,
-                                                                                                       destination: destination)))
+            request.didFinishDownloading(using: downloadTask, with: .failure(.downloadedFileMoveFailed(error: error, source: location, destination: destination)))
         }
     }
 }
