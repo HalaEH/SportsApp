@@ -7,3 +7,35 @@
 //
 
 import Foundation
+
+struct TeamDetails: Codable{
+    let teams: [Team]
+}
+
+struct Team: Codable {
+    let idTeam : String
+    let stadiumName : String
+    let stadiumImage : String
+    let teamBadge: String
+    let website: String
+    let facebook : String
+    let twitter: String
+    let instagram : String
+    let youtube: String
+    let kitImage: String
+
+    
+    enum CodingKeys: String, CodingKey{
+        case idTeam = "idTeam"
+        case stadiumName = "strStadium"
+        case stadiumImage = "strStadiumThumb"
+        case teamBadge = "strTeamBadge"
+        case website = "strWebsite"
+        case facebook = "strFacebook"
+        case twitter = "strTwitter"
+        case instagram = "strInstagram"
+        case youtube = "strYoutube"
+        case kitImage = "strTeamJersey"
+        
+    }
+}
