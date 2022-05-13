@@ -9,3 +9,29 @@
 import Foundation
 import Alamofire
 
+//https://www.thesportsdb.com/api/v1/json/2/all_sports.php
+
+
+class NetworkService{
+  //  var baseUrl = ""
+    
+    func getResponse(completionHandler: @escaping ([Sport]?, Error?) -> ()) {
+        
+        AF.request("www.thesportsdb.com/api/v1/json/2/all_sports.php", method: .get).responseDecodable(of: [Sport].self) { (response) in
+            print("result: \(response)")
+            
+            let result = response.result
+            switch result {
+            case .success(let sports):
+                print("Result SUCCESS")
+                completionHandler(sports, nil)
+            case .failure(let error):
+                print("Result FAILED")
+                completionHandler(nil, error)
+            }
+            
+        }
+    }
+    
+    
+}
