@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		309B54477372545E16535C8B /* Pods_SportsAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83991B289E8252356B0B84BC /* Pods_SportsAppTests.framework */; };
+		6B137E48282F3C66009249A9 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B137E47282F3C66009249A9 /* EndPoint.swift */; };
 		6B8B7B1A282D54570066DCD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7B19282D54570066DCD4 /* AppDelegate.swift */; };
 		6B8B7B1C282D54570066DCD4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7B1B282D54570066DCD4 /* SceneDelegate.swift */; };
 		6B8B7B1F282D54570066DCD4 /* SportsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7B1D282D54570066DCD4 /* SportsApp.xcdatamodeld */; };
@@ -60,6 +61,7 @@
 		173D79501140A52FE8DE2525 /* Pods_SportsApp_SportsAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportsApp_SportsAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FC9B3512E4F3227900EDE1 /* Pods_SportsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53272CB5E8461B6FF2096B9C /* Pods-SportsAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsAppTests.release.xcconfig"; path = "Target Support Files/Pods-SportsAppTests/Pods-SportsAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		6B137E47282F3C66009249A9 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		6B8B7B16282D54570066DCD4 /* SportsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8B7B19282D54570066DCD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B8B7B1B282D54570066DCD4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				8F079984282E979000690A58 /* NetworkService.swift */,
+				6B137E47282F3C66009249A9 /* EndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				8F079977282E96DE00690A58 /* AllLeaguesViewController.swift in Sources */,
 				8F079987282E97A200690A58 /* CoreDateService.swift in Sources */,
 				8F079979282E96F800690A58 /* LeaguesDetailsModel.swift in Sources */,
+				6B137E48282F3C66009249A9 /* EndPoint.swift in Sources */,
 				8F07995A282E8FC000690A58 /* ViewController.swift in Sources */,
 				8F079975282E96A500690A58 /* AllLeaguesPresenter.swift in Sources */,
 				6B8B7B1F282D54570066DCD4 /* SportsApp.xcdatamodeld in Sources */,

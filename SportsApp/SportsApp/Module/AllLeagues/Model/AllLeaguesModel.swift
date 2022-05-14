@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 struct AllLeagues: Codable{
     let leagues: [League]
 }
@@ -21,12 +21,35 @@ struct League: Codable {
     let badge : String
     
     enum CodingKeys: String, CodingKey{
-        case idLeague = "idSport"
+        case idLeague = "idLeague"
         case sportName = "strSport"
         case leagueName = "strLeague"
         case country = "strCountry"
         case youtube = "strYoutube"
         case badge = "strBadge"
+        
+    }
+}*/
+
+struct AllLeagues: Codable{
+    let leagues: [League]
+}
+
+struct League: Codable{
+    let idLeague : String?
+    let strSport : String?
+    let strLeague : String?
+    let strCountry : String?
+    let strYoutube : String?
+    let strBadge : String?
+    
+    enum CodingKeys : String, CodingKey{
+        case idLeague = "idLeague"
+        case strSport = "strSport"
+        case strLeague = "strLeague"
+        case strCountry = "strCountry"
+        case strYoutube = "strYoutube"
+        case strBadge = "strBadge"
         
     }
 }

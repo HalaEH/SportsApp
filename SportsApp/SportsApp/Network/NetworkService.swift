@@ -9,29 +9,112 @@
 import Foundation
 import Alamofire
 
-//https://www.thesportsdb.com/api/v1/json/2/all_sports.php
+protocol ApiProtocol {
+    static func getAllSports(completion: @escaping (AllSports?, Error?)->Void)
+    static func getAllLeagues(sport: String,completion: @escaping (AllLeagues?, Error?)->Void)
+    static func getLeagueDetails(endPoint: EndPoints,completion: @escaping (LeagueDetails?, Error?)->Void)
+    static func getTeamDetails(endPoint: EndPoints,completion: @escaping (TeamDetails?, Error?)->Void)
+}
 
 
-class NetworkService{
-  //  var baseUrl = ""
+class NetworkService: ApiProtocol{
     
-    func getResponse(completionHandler: @escaping ([Sport]?, Error?) -> ()) {
+    static var baseUrl = "https://www.thesportsdb.com/api/v1/json/2"
+    
+    static func getAllSports(completion : @escaping (AllSports?, Error?)->Void) {
+        let path = "\(baseUrl)\(EndPoints.allSports.path)"
         
-        AF.request("www.thesportsdb.com/api/v1/json/2/all_sports.php", method: .get).responseDecodable(of: [Sport].self) { (response) in
-            print("result: \(response)")
-            
-            let result = response.result
-            switch result {
-            case .success(let sports):
-                print("Result SUCCESS")
-                completionHandler(sports, nil)
+        AF.request(path).validate().responseDecodable(of: AllSports.self) { (response) in
+            switch response.result {
+            case .success( _):
+                print("sucess")
+                guard let AllSportData = response.value
+                    else {return}
+                print(AllSportData.sports)
+                completion(AllSportData,nil)
+                print(AllSportData.sports)
+                
             case .failure(let error):
-                print("Result FAILED")
-                completionHandler(nil, error)
+                print("fail")
+                print(error)
+                completion(nil , error)
+                
+                
             }
-            
         }
     }
+    
+    static func getAllLeagues(sport: String,completion : @escaping (AllLeagues?, Error?)->Void) {
+   //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
+
+        let path = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?s=Soccer"
+        AF.request(path).validate().responseDecodable(of: AllLeagues.self) { (response) in
+            switch response.result {
+            case .success( _):
+                print("sucess")
+                guard let AllLeaguesData = response.value
+                    else {return}
+                print(AllLeaguesData.leagues)
+                completion(AllLeaguesData,nil)
+                print(AllLeaguesData.leagues)
+                
+            case .failure(let error):
+                print("fail")
+                print(error)
+                completion(nil , error)
+                
+                
+            }
+        }
+    }
+    
+    static func getLeagueDetails(endPoint: EndPoints,completion : @escaping (LeagueDetails?, Error?)->Void) {
+        let path = "\(baseUrl)\(endPoint)"
+        
+        AF.request(path).validate().responseDecodable(of: LeagueDetails.self) { (response) in
+            switch response.result {
+            case .success( _):
+                print("sucess")
+                guard let LeaguesData = response.value
+                    else {return}
+                print(LeaguesData.events)
+                completion(LeaguesData,nil)
+                print(LeaguesData.events)
+                
+            case .failure(let error):
+                print("fail")
+                print(error)
+                completion(nil , error)
+                
+                
+            }
+        }
+    }
+    
+    static func getTeamDetails(endPoint: EndPoints,completion : @escaping (TeamDetails?, Error?)->Void) {
+        let path = "\(baseUrl)\(endPoint)"
+
+        AF.request(path).validate().responseDecodable(of: TeamDetails.self) { (response) in
+            switch response.result {
+            case .success( _):
+                print("sucess")
+                guard let TeamsData = response.value
+                    else {return}
+                print(TeamsData.teams)
+                completion(TeamsData,nil)
+                print(TeamsData.teams)
+                
+            case .failure(let error):
+                print("fail")
+                print(error)
+                completion(nil , error)
+                
+                
+            }
+        }
+    }
+    
+    
     
     
 }
