@@ -18,7 +18,6 @@ protocol ApiProtocol {
 
 
 class NetworkService: ApiProtocol{
-    
     static var baseUrl = "https://www.thesportsdb.com/api/v1/json/2"
     
     static func getAllSports(completion : @escaping (AllSports?, Error?)->Void) {
@@ -33,13 +32,11 @@ class NetworkService: ApiProtocol{
                 print(AllSportData.sports)
                 completion(AllSportData,nil)
                 print(AllSportData.sports)
-                
+            
             case .failure(let error):
                 print("fail")
                 print(error)
                 completion(nil , error)
-                
-                
             }
         }
     }
@@ -47,7 +44,7 @@ class NetworkService: ApiProtocol{
     static func getAllLeagues(sport: String,completion : @escaping (AllLeagues?, Error?)->Void) {
    //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
 
-        let path = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?s=Soccer"
+        let path = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?c=England&s=Soccer"
         AF.request(path).validate().responseDecodable(of: AllLeagues.self) { (response) in
             switch response.result {
             case .success( _):
@@ -113,8 +110,6 @@ class NetworkService: ApiProtocol{
             }
         }
     }
-    
-    
     
     
 }

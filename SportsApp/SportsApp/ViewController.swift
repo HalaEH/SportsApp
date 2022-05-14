@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
     /*    NetworkService.getAllSports{[weak self ]
             (result ,error) in
@@ -42,6 +41,7 @@ class ViewController: UIViewController {
                        print("error")
                    }
            }
+           
         
     
 }
