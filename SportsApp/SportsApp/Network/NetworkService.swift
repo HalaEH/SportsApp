@@ -11,9 +11,9 @@ import Alamofire
 
 protocol ApiProtocol {
     static func getAllSports(completion: @escaping (AllSports?, Error?)->Void)
-    static func getAllLeagues(sport: String,completion: @escaping (AllLeagues?, Error?)->Void)
+    static func getAllLeagues(sport: String,completion: @escaping (AllLeagues, Error?)->Void)
     static func getLeagueDetails(endPoint: EndPoints,completion: @escaping (LeagueDetails?, Error?)->Void)
-    static func getTeamDetails(endPoint: EndPoints,completion: @escaping (TeamDetails?, Error?)->Void)
+    static func getTeamDetails(leagueName: String, completion: @escaping (TeamDetails?, Error?)->Void)
 }
 
 
@@ -41,7 +41,7 @@ class NetworkService: ApiProtocol{
         }
     }
     
-    static func getAllLeagues(sport: String,completion : @escaping (AllLeagues?, Error?)->Void) {
+    static func getAllLeagues(sport: String,completion : @escaping (AllLeagues, Error?)->Void) {
    //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
 
         let path = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?c=England&s=Soccer"
@@ -53,12 +53,10 @@ class NetworkService: ApiProtocol{
                     else {return}
                 print(AllLeaguesData.leagues)
                 completion(AllLeaguesData,nil)
-                print(AllLeaguesData.leagues)
                 
             case .failure(let error):
                 print("fail")
                 print(error)
-                completion(nil , error)
                 
                 
             }
@@ -88,8 +86,8 @@ class NetworkService: ApiProtocol{
         }
     }
     
-    static func getTeamDetails(endPoint: EndPoints,completion : @escaping (TeamDetails?, Error?)->Void) {
-        let path = "\(baseUrl)\(endPoint)"
+    static func getTeamDetails(leagueName: String, completion : @escaping (TeamDetails?, Error?)->Void) {
+        let path = "\(baseUrl)\(EndPoints.teamDetails(leagueStr: leagueName).path)"
 
         AF.request(path).validate().responseDecodable(of: TeamDetails.self) { (response) in
             switch response.result {
