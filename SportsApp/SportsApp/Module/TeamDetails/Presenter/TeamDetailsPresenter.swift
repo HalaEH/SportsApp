@@ -23,19 +23,11 @@ class TeamDetailsPresenter{
             self?.allTeams = allTeams?.teams
             DispatchQueue.main.async {
                 self?.view.setUpUI()
+                print("DispatchQueue Presenter")
             }
         }
     }
-    /*    func getSports(){
-        NetworkService.getResponse{ [weak self] (allSports,nil) in
-            self?.allSports = allSports?.sports
-            DispatchQueue.main.async {
-                self?.view.printReponse()
-            }
-            
-        }
 
-    }*/
     
 }
 
