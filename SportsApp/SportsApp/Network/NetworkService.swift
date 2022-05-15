@@ -41,27 +41,39 @@ class NetworkService: ApiProtocol{
         }
     }
     
-    static func getAllLeagues(sport: String,completion : @escaping (AllLeagues, Error?)->Void) {
-   //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
+      static func getAllLeagues(sport: String,completion : @escaping (AllLeagues, Error?)->Void) {
+     //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
 
-        let path = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?c=England&s=Soccer"
-        AF.request(path).validate().responseDecodable(of: AllLeagues.self) { (response) in
-            switch response.result {
-            case .success( _):
-                print("sucess")
-                guard let AllLeaguesData = response.value
-                    else {return}
-                print(AllLeaguesData.leagues)
-                completion(AllLeaguesData,nil)
-                
-            case .failure(let error):
-                print("fail")
-                print(error)
-                
-                
-            }
-        }
-    }
+         /* let param: Parameters = ["s": "Soccer"]
+          AF.request("https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php", method: .get, parameters: param, encoding: URLEncoding.queryString).validate()
+              .responseDecodable(of: AllLeagues.self) {
+                  (response) in
+                  guard let sportsResponse = response.value?.countries else{
+                      print("else")
+                      return
+                  }
+                  print(sportsResponse.count)
+                  print("end")
+          }*/
+         let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
+
+                 AF.request(path).validate().responseDecodable(of: AllLeagues.self) { (response) in
+                     switch response.result {
+                     case .success( _):
+                         print("sucess")
+                         guard let TeamsData = response.value
+                             else {return}
+                         print(TeamsData.countries)
+                         completion(TeamsData,nil)
+                         print(TeamsData.countries)
+                         
+                     case .failure(let error):
+                         print("fail")
+                         print(error)
+                      //   completion(nil , error)
+                     }
+                 }
+      }
     
     static func getLeagueDetails(endPoint: EndPoints,completion : @escaping (LeagueDetails?, Error?)->Void) {
         let path = "\(baseUrl)\(endPoint)"
