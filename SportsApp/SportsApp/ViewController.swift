@@ -12,7 +12,7 @@ import Alamofire
 class ViewController: UIViewController {
     
     var sports: [Sport] = [Sport]()
-    var leagues: [String:[League]] = [String:[League]]()
+    var leagues: [League] = [League]()
     var teams: [Team] = [Team]()
     @IBAction func btn(_ sender: UIButton) {
         print("hi")
@@ -21,27 +21,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*    NetworkService.getAllSports{[weak self ]
-         (result ,error) in
-         if result?.sports != nil {
-         self?.sports = result!.sports
-         print(self?.sports.count)
-         }
-         else {
-         print("error")
-         }
-         }*/
+       
         NetworkService.getAllLeagues(sport: "Soccer"){[weak self]
             (result ,error) in
             if result != nil {
-                self?.leagues = result.leagues
-                print(self?.leagues.count)
+                self?.leagues = result.countries
+                print(self?.leagues)
             }
             else {
                 print("error")
             }
-            
-            
+
+
         }
         
         /*NetworkService.getTeamDetails(leagueName: "English%20Premier%20League") { [weak self] (result, error) in
