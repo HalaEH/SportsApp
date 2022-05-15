@@ -14,6 +14,7 @@ struct TeamDetails: Codable{
 
 struct Team: Codable {
     let idTeam : String
+    let teamName: String
     let stadiumName : String
     let stadiumImage : String
     let teamBadge: String
@@ -27,6 +28,7 @@ struct Team: Codable {
     
     enum CodingKeys: String, CodingKey{
         case idTeam = "idTeam"
+        case teamName = "strTeam"
         case stadiumName = "strStadium"
         case stadiumImage = "strStadiumThumb"
         case teamBadge = "strTeamBadge"

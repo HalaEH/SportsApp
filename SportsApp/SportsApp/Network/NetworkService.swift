@@ -88,6 +88,7 @@ class NetworkService: ApiProtocol{
     
     static func getTeamDetails(leagueName: String, completion : @escaping (TeamDetails?, Error?)->Void) {
         let path = "\(baseUrl)\(EndPoints.teamDetails(leagueStr: leagueName).path)"
+        
 
         AF.request(path).validate().responseDecodable(of: TeamDetails.self) { (response) in
             switch response.result {
@@ -95,9 +96,9 @@ class NetworkService: ApiProtocol{
                 print("sucess")
                 guard let TeamsData = response.value
                     else {return}
-                print(TeamsData.teams)
+                print(TeamsData.teams[0].facebook)
                 completion(TeamsData,nil)
-                print(TeamsData.teams)
+                //print(TeamsData.teams)
                 
             case .failure(let error):
                 print("fail")

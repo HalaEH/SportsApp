@@ -7,3 +7,36 @@
 //
 
 import Foundation
+class TeamDetailsPresenter{
+    var allTeams : [Team]!
+    var view : TeamDetailsProtcol!
+    
+    init(NWService : NetworkService){
+    }
+    
+    func attatchView(view:TeamDetailsProtcol){
+        self.view = view
+    }
+    
+    func getAllTeams(){
+        NetworkService.getTeamDetails(leagueName: "English%20Premier%20League") { [weak self] (allTeams, nil) in
+            self?.allTeams = allTeams?.teams
+            DispatchQueue.main.async {
+                self?.view.setUpUI()
+            }
+        }
+    }
+    /*    func getSports(){
+        NetworkService.getResponse{ [weak self] (allSports,nil) in
+            self?.allSports = allSports?.sports
+            DispatchQueue.main.async {
+                self?.view.printReponse()
+            }
+            
+        }
+
+    }*/
+    
+}
+
+

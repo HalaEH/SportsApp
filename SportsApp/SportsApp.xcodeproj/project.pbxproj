@@ -33,6 +33,11 @@
 		8F07998A282E986900690A58 /* AllSportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F079989282E986900690A58 /* AllSportsViewController.swift */; };
 		8F07998C282E988400690A58 /* AllSportsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F07998B282E988400690A58 /* AllSportsPresenter.swift */; };
 		8F07998E282E989400690A58 /* AllSportsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F07998D282E989400690A58 /* AllSportsModel.swift */; };
+		8F9437F1282FC65F00010DE2 /* arsenal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9437F0282FC65F00010DE2 /* arsenal.png */; };
+		8F9437F6282FD04700010DE2 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9437F2282FD04600010DE2 /* twitter.png */; };
+		8F9437F7282FD04700010DE2 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9437F3282FD04600010DE2 /* facebook.png */; };
+		8F9437F8282FD04700010DE2 /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9437F4282FD04700010DE2 /* youtube.png */; };
+		8F9437F9282FD04700010DE2 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9437F5282FD04700010DE2 /* instagram.png */; };
 		CA01096108717AAE7661927B /* Pods_SportsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FC9B3512E4F3227900EDE1 /* Pods_SportsApp.framework */; };
 		F7E7907AD86643EAB62363E4 /* Pods_SportsApp_SportsAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173D79501140A52FE8DE2525 /* Pods_SportsApp_SportsAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +95,11 @@
 		8F079989282E986900690A58 /* AllSportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsViewController.swift; sourceTree = "<group>"; };
 		8F07998B282E988400690A58 /* AllSportsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsPresenter.swift; sourceTree = "<group>"; };
 		8F07998D282E989400690A58 /* AllSportsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsModel.swift; sourceTree = "<group>"; };
+		8F9437F0282FC65F00010DE2 /* arsenal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arsenal.png; path = "../../../../Downloads/Deporte-main/Deporte/arsenal.png"; sourceTree = "<group>"; };
+		8F9437F2282FD04600010DE2 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = ../../../../Downloads/twitter.png; sourceTree = "<group>"; };
+		8F9437F3282FD04600010DE2 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook.png; path = ../../../../Downloads/facebook.png; sourceTree = "<group>"; };
+		8F9437F4282FD04700010DE2 /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youtube.png; path = ../../../../Downloads/youtube.png; sourceTree = "<group>"; };
+		8F9437F5282FD04700010DE2 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = instagram.png; path = ../../../../Downloads/instagram.png; sourceTree = "<group>"; };
 		A1220E2AD1626BA94547E31E /* Pods-SportsApp-SportsAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp-SportsAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-SportsApp-SportsAppUITests/Pods-SportsApp-SportsAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB9E205D1DEC5BA66D570F8B /* Pods-SportsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp.release.xcconfig"; path = "Target Support Files/Pods-SportsApp/Pods-SportsApp.release.xcconfig"; sourceTree = "<group>"; };
 		D2BEF6BA1765F54CC191DBE0 /* Pods-SportsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp.debug.xcconfig"; path = "Target Support Files/Pods-SportsApp/Pods-SportsApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +142,11 @@
 				6B8B7B32282D545B0066DCD4 /* SportsAppTests */,
 				6B8B7B3D282D545B0066DCD4 /* SportsAppUITests */,
 				6B8B7B17282D54570066DCD4 /* Products */,
+				8F9437F3282FD04600010DE2 /* facebook.png */,
+				8F9437F5282FD04700010DE2 /* instagram.png */,
+				8F9437F2282FD04600010DE2 /* twitter.png */,
+				8F9437F4282FD04700010DE2 /* youtube.png */,
+				8F9437F0282FC65F00010DE2 /* arsenal.png */,
 				B47D56A9ACBC250A18D60CF7 /* Pods */,
 				81AF0B06CE514C3D91EC7FE7 /* Frameworks */,
 			);
@@ -528,8 +543,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F9437F1282FC65F00010DE2 /* arsenal.png in Resources */,
 				6B8B7B29282D545A0066DCD4 /* LaunchScreen.storyboard in Resources */,
 				6B8B7B26282D545A0066DCD4 /* Preview Assets.xcassets in Resources */,
+				8F9437F9282FD04700010DE2 /* instagram.png in Resources */,
+				8F9437F8282FD04700010DE2 /* youtube.png in Resources */,
+				8F9437F7282FD04700010DE2 /* facebook.png in Resources */,
+				8F9437F6282FD04700010DE2 /* twitter.png in Resources */,
 				6B8B7B23282D545A0066DCD4 /* Assets.xcassets in Resources */,
 				8F079958282E8EBB00690A58 /* Main.storyboard in Resources */,
 			);
