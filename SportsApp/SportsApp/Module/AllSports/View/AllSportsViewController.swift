@@ -53,7 +53,7 @@ class AllSportsViewController: UICollectionViewController, UICollectionViewDeleg
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return sportsArray.count
+        return sportsArray.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

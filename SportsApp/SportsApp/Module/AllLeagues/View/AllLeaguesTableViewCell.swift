@@ -10,12 +10,14 @@ import UIKit
 
 class AllLeaguesTableViewCell: UITableViewCell {
     @IBOutlet weak var leagueImg: UIImageView!
-    
     @IBOutlet weak var youtubeBtn: UIButton!
     @IBOutlet weak var leagueNameLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        leagueImg.layer.cornerRadius = 75
+        leagueImg.clipsToBounds = true
+        leagueImg.layer.borderWidth = 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
