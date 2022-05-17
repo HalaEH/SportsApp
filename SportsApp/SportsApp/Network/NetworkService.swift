@@ -11,6 +11,7 @@ import Alamofire
 
 protocol ApiProtocol {
     static func getAllSports(completion: @escaping (AllSports?, Error?)->Void)
+    static func getUpComing(completion: @escaping (AllEvents?, Error?)->Void)
     static func getAllLeagues(sport: String,completion: @escaping (AllLeagues, Error?)->Void)
     static func getLeagueDetails(endPoint: EndPoints,completion: @escaping (LeagueDetails?, Error?)->Void)
     static func getTeamDetails(leagueName: String, completion: @escaping (TeamDetails?, Error?)->Void)
@@ -32,6 +33,24 @@ class NetworkService: ApiProtocol{
                 print(AllSportData.sports)
                 completion(AllSportData,nil)
                 print(AllSportData.sports)
+            
+            case .failure(let error):
+                print("fail")
+                print(error)
+                completion(nil , error)
+            }
+        }
+    }
+    static func getUpComing(completion : @escaping (AllEvents?, Error?)->Void) {
+        let path = "\(baseUrl)\(EndPoints.upComing.path)"
+        
+        AF.request(path).validate().responseDecodable(of: AllEvents.self) { (response) in
+            switch response.result {
+            case .success( _):
+                //print("sucess")
+                guard let upcomingEvents = response.value
+                    else {return}
+                completion(upcomingEvents,nil)
             
             case .failure(let error):
                 print("fail")
@@ -105,7 +124,7 @@ class NetworkService: ApiProtocol{
         AF.request(path).validate().responseDecodable(of: TeamDetails.self) { (response) in
             switch response.result {
             case .success( _):
-                print("sucess")
+                //print("sucess")
                 guard let TeamsData = response.value
                     else {return}
                 print(TeamsData.teams[0].facebook)
