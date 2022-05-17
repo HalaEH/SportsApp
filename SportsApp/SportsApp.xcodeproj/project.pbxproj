@@ -38,6 +38,8 @@
 		8F07998A282E986900690A58 /* AllSportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F079989282E986900690A58 /* AllSportsViewController.swift */; };
 		8F07998C282E988400690A58 /* AllSportsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F07998B282E988400690A58 /* AllSportsPresenter.swift */; };
 		8F07998E282E989400690A58 /* AllSportsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F07998D282E989400690A58 /* AllSportsModel.swift */; };
+		8FCE15452833145C00681443 /* UpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE15442833145B00681443 /* UpcomingCell.swift */; };
+		8FCE15472833277200681443 /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE15462833277200681443 /* TeamCell.swift */; };
 		CA01096108717AAE7661927B /* Pods_SportsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FC9B3512E4F3227900EDE1 /* Pods_SportsApp.framework */; };
 		F7E7907AD86643EAB62363E4 /* Pods_SportsApp_SportsAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173D79501140A52FE8DE2525 /* Pods_SportsApp_SportsAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,8 @@
 		8F079989282E986900690A58 /* AllSportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsViewController.swift; sourceTree = "<group>"; };
 		8F07998B282E988400690A58 /* AllSportsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsPresenter.swift; sourceTree = "<group>"; };
 		8F07998D282E989400690A58 /* AllSportsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsModel.swift; sourceTree = "<group>"; };
+		8FCE15442833145B00681443 /* UpcomingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingCell.swift; sourceTree = "<group>"; };
+		8FCE15462833277200681443 /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		A1220E2AD1626BA94547E31E /* Pods-SportsApp-SportsAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp-SportsAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-SportsApp-SportsAppUITests/Pods-SportsApp-SportsAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB9E205D1DEC5BA66D570F8B /* Pods-SportsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp.release.xcconfig"; path = "Target Support Files/Pods-SportsApp/Pods-SportsApp.release.xcconfig"; sourceTree = "<group>"; };
 		D2BEF6BA1765F54CC191DBE0 /* Pods-SportsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp.debug.xcconfig"; path = "Target Support Files/Pods-SportsApp/Pods-SportsApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -381,6 +385,8 @@
 			isa = PBXGroup;
 			children = (
 				8F07997C282E973700690A58 /* LeaguesDetailsViewController.swift */,
+				8FCE15442833145B00681443 /* UpcomingCell.swift */,
+				8FCE15462833277200681443 /* TeamCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -682,9 +688,11 @@
 				8F079977282E96DE00690A58 /* AllLeaguesViewController.swift in Sources */,
 				8F079987282E97A200690A58 /* CoreDateService.swift in Sources */,
 				8F079979282E96F800690A58 /* LeaguesDetailsModel.swift in Sources */,
+				8FCE15472833277200681443 /* TeamCell.swift in Sources */,
 				6B137E48282F3C66009249A9 /* EndPoint.swift in Sources */,
 				8F07995A282E8FC000690A58 /* ViewController.swift in Sources */,
 				8F079975282E96A500690A58 /* AllLeaguesPresenter.swift in Sources */,
+				8FCE15452833145C00681443 /* UpcomingCell.swift in Sources */,
 				6B8B7B1F282D54570066DCD4 /* SportsApp.xcdatamodeld in Sources */,
 				8F079973282E969000690A58 /* AllLeaguesModel.swift in Sources */,
 				8F079985282E979000690A58 /* NetworkService.swift in Sources */,
