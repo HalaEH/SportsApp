@@ -16,9 +16,12 @@ protocol LeagueDetailsProtocol {
 class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
+    @IBOutlet weak var latestCV: UICollectionView!
+    
     @IBOutlet weak var teamsCV: UICollectionView!
     
     @IBOutlet weak var upComingCV: UICollectionView!
+    
     var teams: [Team] = [Team]()
     var upcomingEvents: [Event] = [Event]()
     
@@ -27,10 +30,14 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //set delegates
         upComingCV.delegate = self
         upComingCV.dataSource = self
         teamsCV.delegate = self
         teamsCV.dataSource = self
+        latestCV.delegate = self
+        latestCV.dataSource = self
         
         //PRESENTER
         
@@ -47,14 +54,20 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width)
             
         }
-        return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2)
+        if collectionView == latestCV{
+            return CGSize(width: collectionView.frame.size.width/1.0, height: collectionView.frame.size.width/2.0)
+            
+        }
+        return CGSize(width: collectionView.frame.width/3.0, height: collectionView.frame.width/3.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == upComingCV{
             return upcomingEvents.count
-            
+        }
+        if collectionView == latestCV{
+            return upcomingEvents.count
         }
         return teams.count
     }
@@ -72,6 +85,18 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
             cell.imageEvent.layer.masksToBounds = true
             cell.dateLabel.text = event.dateEvent
             cell.timeLabel.text = event.strTime
+            
+            return cell
+        }
+        if collectionView == latestCV {
+            let event: Event = upcomingEvents[indexPath.row]
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latest_cell", for: indexPath) as! LatestCell
+            cell.layer.cornerRadius = 10
+            let url = URL(string: event.strThumb)
+            cell.latestImage.kf.setImage(with: url)
+            cell.latestImage.layer.cornerRadius = 15
+            cell.latestImage.layer.masksToBounds = true
             
             return cell
         }
@@ -116,6 +141,7 @@ extension LeaguesDetailsViewController: LeagueDetailsProtocol{
     func fillUpcomingData(){
         upcomingEvents = presenter.upcomingEvents
         upComingCV.reloadData()
+        latestCV.reloadData()
         //print(upcomingEvents)
         
     }
