@@ -33,8 +33,9 @@ class AllSportsViewController: UICollectionViewController, UICollectionViewDeleg
         presenter.getItems()
     }
     
-    /*
-     // MARK: - Navigation
+  
+    
+ /*    // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,7 +54,7 @@ class AllSportsViewController: UICollectionViewController, UICollectionViewDeleg
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return sportsArray.count
+        return sportsArray.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,6 +67,14 @@ class AllSportsViewController: UICollectionViewController, UICollectionViewDeleg
         cell.sportImage.kf.setImage(with: url)
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let allLeagues = main.instantiateViewController(identifier: "AllLeaguesVC") as AllLeaguesViewController
+        allLeagues.modalPresentationStyle = .fullScreen
+        allLeagues.leagueName = sportsArray[indexPath.row].sportName
+        navigationController?.pushViewController(allLeagues, animated: true)
     }
     
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
