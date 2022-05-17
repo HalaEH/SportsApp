@@ -16,6 +16,7 @@ protocol LeagueDetailsProtocol {
 
 class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+
     @IBOutlet weak var back: UIImageView!
     
     @IBOutlet weak var latestCV: UICollectionView!
@@ -145,6 +146,12 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     @objc func backTapped(gesture: UIGestureRecognizer){
         self.dismiss(animated: true, completion: nil)
 
+    }
+    
+    @IBAction func favBtn(_ sender: UIButton) {
+        
+        
+        
     }
     
     
