@@ -75,15 +75,20 @@ class AllLeaguesViewController: UIViewController, UITableViewDelegate, UITableVi
         return 200
     }
     
-   /* func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let leagueDetails = main.instantiateViewController(identifier: "leagueDetailsVC") as LeaguesDetailsViewController
         leagueDetails.modalPresentationStyle = .fullScreen
         leagueDetails.leagueId = leaguesArray[indexPath.row].idLeague
-        leagueDetails.sportName = leaguesArray[indexPath.row].strSport
-        navigationController?.pushViewController(leagueDetails, animated: true)
+        self.present(leagueDetails, animated: true, completion: nil)
+
+        /*leagueDetails.sportName = leaguesArray[indexPath.row].strSport
+        navigationController?.pushViewController(leagueDetails, animated: true)*/
     }
-*/
+
+     
+     
+
     
     @objc func buttonAction(sender: UIButton){
         let url = NSURL(string:"https://\(leaguesArray[sender.tag].strYoutube ?? "")")! as URL

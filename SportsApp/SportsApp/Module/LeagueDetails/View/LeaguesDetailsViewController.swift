@@ -11,10 +11,12 @@ import UIKit
 protocol LeagueDetailsProtocol {
     func fillTeamsData()
     func fillUpcomingData()
+    func fillMatchesData()
 }
 
 class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var back: UIImageView!
     
     @IBOutlet weak var latestCV: UICollectionView!
     
@@ -24,6 +26,9 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     var teams: [Team] = [Team]()
     var upcomingEvents: [Event] = [Event]()
+    var leagueMatches: [Event] = [Event]()
+    
+    var leagueId: String?
     
     var presenter: LeagueDetailsPresenter!
     var selectedTeam: Team!
@@ -44,7 +49,10 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
         presenter = LeagueDetailsPresenter(NWService: NetworkService())
         presenter.attatchView(view: self)
         presenter.getAllTeams()
-        presenter.getUpcomingEvents()
+        //presenter.getUpcomingEvents()
+        presenter.leagueMatches(idLeague: leagueId!)
+        
+        handleBack()
         
     }
     
@@ -67,7 +75,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
             return upcomingEvents.count
         }
         if collectionView == latestCV{
-            return upcomingEvents.count
+            return leagueMatches.count
         }
         return teams.count
     }
@@ -89,7 +97,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
             return cell
         }
         if collectionView == latestCV {
-            let event: Event = upcomingEvents[indexPath.row]
+            let event: Event = leagueMatches[indexPath.row]
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latest_cell", for: indexPath) as! LatestCell
             cell.layer.cornerRadius = 10
@@ -127,6 +135,18 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
         
     }
     
+    func handleBack(){
+        let backTap = UITapGestureRecognizer(target: self, action: #selector(backTapped))
+        
+        back.addGestureRecognizer(backTap)
+        back.isUserInteractionEnabled = true
+        
+    }
+    @objc func backTapped(gesture: UIGestureRecognizer){
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
     
 }
 extension LeaguesDetailsViewController: LeagueDetailsProtocol{
@@ -134,7 +154,6 @@ extension LeaguesDetailsViewController: LeagueDetailsProtocol{
         
         teams = presenter.allTeams
         teamsCV.reloadData()
-        print(teams)
         
     }
     
@@ -143,6 +162,11 @@ extension LeaguesDetailsViewController: LeagueDetailsProtocol{
         upComingCV.reloadData()
         latestCV.reloadData()
         //print(upcomingEvents)
+        
+    }
+    func fillMatchesData(){
+        leagueMatches = presenter.matches
+        latestCV.reloadData()
         
     }
     

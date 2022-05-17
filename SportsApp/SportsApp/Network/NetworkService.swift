@@ -59,6 +59,24 @@ class NetworkService: ApiProtocol{
             }
         }
     }
+    static func getLeagueMatches(leagueID: String,completion : @escaping (AllEvents?, Error?)->Void) {
+        let path = "\(baseUrl)\(EndPoints.matches(leagueID: leagueID).path)"
+        
+        AF.request(path).validate().responseDecodable(of: AllEvents.self) { (response) in
+            switch response.result {
+            case .success( _):
+                //print("sucess")
+                guard let upcomingEvents = response.value
+                    else {return}
+                completion(upcomingEvents,nil)
+            
+            case .failure(let error):
+                print("fail")
+                print(error)
+                completion(nil , error)
+            }
+        }
+    }
     
       static func getAllLeagues(sport: String,completion : @escaping (AllLeagues, Error?)->Void) {
      //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"

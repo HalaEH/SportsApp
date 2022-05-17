@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sY0-R7-kEp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yda-ff-2ug">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -230,7 +230,7 @@
                                                 </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upcoming Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnV-w8-bqf">
-                                                <rect key="frame" x="21" y="46" width="211" height="27"/>
+                                                <rect key="frame" x="21" y="54" width="211" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -250,6 +250,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="left-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="UZk-pp-mwj">
+                                                <rect key="frame" x="8" y="21" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
@@ -266,6 +270,7 @@
                         <viewLayoutGuide key="safeArea" id="fdI-Ly-ph5"/>
                     </view>
                     <connections>
+                        <outlet property="back" destination="UZk-pp-mwj" id="icS-EB-GDX"/>
                         <outlet property="latestCV" destination="nrj-xw-wcY" id="53c-qd-DE5"/>
                         <outlet property="teamsCV" destination="AvP-M1-8Cr" id="hei-kN-65Y"/>
                         <outlet property="upComingCV" destination="eeF-f2-e2l" id="0vy-sj-mbC"/>
@@ -322,15 +327,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRR-eW-fLC">
-                                <rect key="frame" x="35" y="36" width="42" height="34"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="left-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="eoz-DI-eJt">
+                                <rect key="frame" x="9" y="44" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="back:" destination="PJS-Ko-3Vp" eventType="touchUpInside" id="lzb-hA-MVf"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -356,6 +356,7 @@
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="back" destination="eoz-DI-eJt" id="0yW-3J-JqY"/>
                         <outlet property="iconFacebook" destination="64O-zh-9PK" id="n7y-zz-CxT"/>
                         <outlet property="iconInstagram" destination="F1D-fE-IqN" id="dv4-eh-Dw1"/>
                         <outlet property="iconTwitter" destination="PN0-5Y-ESQ" id="DFh-kB-oOP"/>
@@ -456,6 +457,7 @@
     <resources>
         <image name="facebook-2" width="512" height="512"/>
         <image name="instagram-2" width="512" height="512"/>
+        <image name="left-arrow" width="512" height="512"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <image name="twitter-2" width="512" height="512"/>
         <image name="youtube-2" width="512" height="512"/>

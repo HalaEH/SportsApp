@@ -15,12 +15,9 @@ protocol TeamDetailsProtcol {
 
 class TeamDetailsViewController: UIViewController {
     
+    @IBOutlet weak var back: UIImageView!
+    
 
-    @IBAction func back(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-
-        
-    }
     @IBOutlet weak var iconYoutube: UIImageView!
     @IBOutlet weak var iconInstagram: UIImageView!
     @IBOutlet weak var iconTwitter: UIImageView!
@@ -37,9 +34,22 @@ class TeamDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        handleBack()
         /*presenter = TeamDetailsPresenter(NWService: NetworkService())
         presenter.attatchView(view: self)
         presenter.getAllTeams()*/
+    }
+    
+    func handleBack(){
+        let backTap = UITapGestureRecognizer(target: self, action: #selector(backTapped))
+        
+        back.addGestureRecognizer(backTap)
+        back.isUserInteractionEnabled = true
+        
+    }
+    @objc func backTapped(gesture: UIGestureRecognizer){
+        self.dismiss(animated: true, completion: nil)
+
     }
     
 

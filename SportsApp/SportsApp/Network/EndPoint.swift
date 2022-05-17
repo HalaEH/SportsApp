@@ -15,6 +15,7 @@ enum EndPoints {
     case allTeams(leagueStr: String)
     case teamDetails(leagueStr: String)
     case upComing
+    case matches(leagueID: String)
     
     
     var path:String{
@@ -33,6 +34,8 @@ enum EndPoints {
             return "/eventsround.php?id=4328&r=38&s=2021-2022"
           //  return "/eventslast.php?id=\(teamId)"
             //https://www.thesportsdb.com/api/v1/json/2/eventsround.php?id=4328&r=38&s=2021-2022
+        case .matches(let leagueID):
+            return "/eventsseason.php?id=\(leagueID)"
             
         }
     }

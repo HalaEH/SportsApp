@@ -11,6 +11,8 @@ class LeagueDetailsPresenter{
     var allTeams : [Team]!
     var view : LeagueDetailsProtocol!
     var upcomingEvents : [Event]!
+    var matches : [Event]!
+
     
     init(NWService : NetworkService){
     }
@@ -34,6 +36,15 @@ class LeagueDetailsPresenter{
             self?.upcomingEvents = upcomingEvents?.events
             DispatchQueue.main.async {
                 self?.view.fillUpcomingData()
+            }
+        }
+    }
+    func leagueMatches(idLeague: String){
+            
+        NetworkService.getLeagueMatches(leagueID: idLeague) { [weak self] (matches, nil) in
+            self?.matches = matches?.events
+            DispatchQueue.main.async {
+                self?.view.fillMatchesData()
             }
         }
     }
