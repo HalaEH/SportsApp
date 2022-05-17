@@ -16,6 +16,11 @@ protocol TeamDetailsProtcol {
 class TeamDetailsViewController: UIViewController {
     
 
+    @IBAction func back(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+
+        
+    }
     @IBOutlet weak var iconYoutube: UIImageView!
     @IBOutlet weak var iconInstagram: UIImageView!
     @IBOutlet weak var iconTwitter: UIImageView!
@@ -31,10 +36,10 @@ class TeamDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        presenter = TeamDetailsPresenter(NWService: NetworkService())
+        setUpUI()
+        /*presenter = TeamDetailsPresenter(NWService: NetworkService())
         presenter.attatchView(view: self)
-        presenter.getAllTeams()
+        presenter.getAllTeams()*/
     }
     
 
@@ -45,10 +50,10 @@ class TeamDetailsViewController: UIViewController {
 extension TeamDetailsViewController: TeamDetailsProtcol{
 
     func setUpUI(){
-        teams = presenter.allTeams
+        //teams = presenter.allTeams
         //print("TeamDetails View\(self.teams)")
-        teams = teams.filter { $0.idTeam == "133604" }
-        selectedTeam = teams[0]
+        //teams = teams.filter { $0.idTeam == "133604" }
+        //selectedTeam = teams[0]
         
         teamName.text = selectedTeam.teamName
         stadiumName.text = selectedTeam.stadiumName
