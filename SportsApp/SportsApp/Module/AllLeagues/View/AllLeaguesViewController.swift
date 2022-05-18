@@ -36,7 +36,6 @@ class AllLeaguesViewController: UIViewController, UITableViewDelegate, UITableVi
         presenter = AllLeaguesPresenter(NWService: NetworkService())
         presenter.attachView(view: self)
         presenter.getItems(title: leagueName ?? "")
-        print(leagueName)
         
         let tap = UIGestureRecognizer(target: self, action: #selector(goBack))
     }
@@ -79,7 +78,7 @@ class AllLeaguesViewController: UIViewController, UITableViewDelegate, UITableVi
         let main = UIStoryboard(name: "Main", bundle: nil)
         let leagueDetails = main.instantiateViewController(identifier: "leagueDetailsVC") as LeaguesDetailsViewController
         leagueDetails.modalPresentationStyle = .fullScreen
-        leagueDetails.leagueId = leaguesArray[indexPath.row].idLeague
+    leagueDetails.selectedLeague = leaguesArray[indexPath.row]
         self.present(leagueDetails, animated: true, completion: nil)
 
         /*leagueDetails.sportName = leaguesArray[indexPath.row].strSport

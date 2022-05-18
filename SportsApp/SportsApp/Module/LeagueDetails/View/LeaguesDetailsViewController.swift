@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 protocol LeagueDetailsProtocol {
     func fillTeamsData()
     func fillUpcomingData()
     func fillMatchesData()
+    func setUpFav()
 }
 
 class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-
+    @IBOutlet weak var favBtn: UIButton!
+    
     @IBOutlet weak var back: UIImageView!
     
     @IBOutlet weak var latestCV: UICollectionView!
@@ -30,6 +33,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     var leagueMatches: [Event] = [Event]()
     
     var leagueId: String?
+    var selectedLeague: League?
     
     var presenter: LeagueDetailsPresenter!
     var selectedTeam: Team!
@@ -51,7 +55,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
         presenter.attatchView(view: self)
         presenter.getAllTeams()
         //presenter.getUpcomingEvents()
-        presenter.leagueMatches(idLeague: leagueId!)
+        presenter.leagueMatches(idLeague: selectedLeague!.idLeague)
         
         handleBack()
         
@@ -73,7 +77,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == upComingCV{
-            return upcomingEvents.count
+            return leagueMatches.count
         }
         if collectionView == latestCV{
             return leagueMatches.count
@@ -84,7 +88,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == upComingCV {
-            let event: Event = upcomingEvents[indexPath.row]
+            let event: Event = leagueMatches[indexPath.row]
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcoming_cell", for: indexPath) as! UpcomingCell
             cell.layer.cornerRadius = 10
@@ -145,17 +149,29 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     @objc func backTapped(gesture: UIGestureRecognizer){
         self.dismiss(animated: true, completion: nil)
-
-    }
-    
-    @IBAction func favBtn(_ sender: UIButton) {
-        
-        
         
     }
     
+    
+    
+    @IBAction func addToFav(_ sender: Any) {
+        print("btn")
+        print(selectedLeague?.idLeague)
+        if(!(presenter?.isFav(leagueId: selectedLeague?.idLeague ?? "0"))!){
+            favBtn.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+            print("add")
+            presenter.addToFavs(league: selectedLeague!)
+        }else{
+            favBtn.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+            presenter.deleteFromFavs(league: selectedLeague!)
+            print("remove")
+        }
+        
+    }
     
 }
+
+
 extension LeaguesDetailsViewController: LeagueDetailsProtocol{
     func fillTeamsData() {
         
@@ -174,9 +190,15 @@ extension LeaguesDetailsViewController: LeagueDetailsProtocol{
     func fillMatchesData(){
         leagueMatches = presenter.matches
         latestCV.reloadData()
-        
+        upComingCV.reloadData()
     }
     
-    
+    func setUpFav(){
+        if((presenter?.isFav(leagueId: selectedLeague?.idLeague ?? "0"))!){
+            favBtn.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+        }else{
+            favBtn.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+        }
+    }
     
 }

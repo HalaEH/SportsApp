@@ -25,7 +25,6 @@ class AllLeaguesPresenter {
         NetworkService.getAllLeagues(sport: title){[weak self ](result ,error) in
             if result.countries != nil {
                 self?.result = result.countries
-                print(result.countries[0].strLeague ?? "")
             }
             else {
                 print("error")

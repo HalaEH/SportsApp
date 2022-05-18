@@ -30,9 +30,9 @@ class NetworkService: ApiProtocol{
                 print("sucess")
                 guard let AllSportData = response.value
                     else {return}
-                print(AllSportData.sports)
+       //         print(AllSportData.sports)
                 completion(AllSportData,nil)
-                print(AllSportData.sports)
+         //       print(AllSportData.sports)
             
             case .failure(let error):
                 print("fail")
@@ -100,9 +100,7 @@ class NetworkService: ApiProtocol{
                          print("sucess")
                          guard let TeamsData = response.value
                              else {return}
-                         print(TeamsData.countries)
                          completion(TeamsData,nil)
-                         print(TeamsData.countries)
                          
                      case .failure(let error):
                          print("fail")
@@ -121,9 +119,9 @@ class NetworkService: ApiProtocol{
                 print("sucess")
                 guard let LeaguesData = response.value
                     else {return}
-                print(LeaguesData.events)
+         //       print(LeaguesData.events)
                 completion(LeaguesData,nil)
-                print(LeaguesData.events)
+       //         print(LeaguesData.events)
                 
             case .failure(let error):
                 print("fail")
@@ -145,7 +143,7 @@ class NetworkService: ApiProtocol{
                 //print("sucess")
                 guard let TeamsData = response.value
                     else {return}
-                print(TeamsData.teams[0].facebook)
+     //           print(TeamsData.teams[0].facebook)
                 completion(TeamsData,nil)
                 //print(TeamsData.teams)
                 

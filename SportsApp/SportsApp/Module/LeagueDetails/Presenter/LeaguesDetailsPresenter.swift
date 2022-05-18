@@ -12,6 +12,7 @@ class LeagueDetailsPresenter{
     var view : LeagueDetailsProtocol!
     var upcomingEvents : [Event]!
     var matches : [Event]!
+    lazy var favDataSource = FavoritesDataSource.instance
 
     
     init(NWService : NetworkService){
@@ -48,6 +49,17 @@ class LeagueDetailsPresenter{
             }
         }
     }
-
     
+    func isFav(leagueId: String)->Bool{
+        return favDataSource.isFav(leagueId: leagueId)
+    }
+    
+    func addToFavs(league: League){
+        favDataSource.saveLeague(league: league)
+    }
+    
+    func deleteFromFavs(league: League){
+        favDataSource.deleteLeague(league: league)
+    }
+
 }

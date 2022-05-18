@@ -26,7 +26,6 @@ class AllSportsPresenter {
         NetworkService.getAllSports{[weak self ](result ,error) in
             if result?.sports != nil {
                 self?.result = result?.sports
-                print(result?.sports[0].sportName ?? "")
             }
             else {
                 print("error")
