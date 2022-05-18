@@ -58,6 +58,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
         presenter.leagueMatches(idLeague: selectedLeague!.idLeague)
         
         handleBack()
+        setUpFav()
         
     }
     
@@ -196,8 +197,10 @@ extension LeaguesDetailsViewController: LeagueDetailsProtocol{
     func setUpFav(){
         if((presenter?.isFav(leagueId: selectedLeague?.idLeague ?? "0"))!){
             favBtn.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+            favBtn.reloadInputViews()
         }else{
             favBtn.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+            favBtn.reloadInputViews()
         }
     }
     

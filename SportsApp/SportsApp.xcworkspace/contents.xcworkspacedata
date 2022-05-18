@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/halaemad/Documents/GitHub/SportsApp/SportsApp/SportsApp/Module/FavoriteTableViewCell.swift">
+   </FileRef>
+   <FileRef
       location = "group:SportsApp.xcodeproj">
    </FileRef>
    <FileRef
