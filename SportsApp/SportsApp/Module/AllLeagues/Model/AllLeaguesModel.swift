@@ -13,12 +13,12 @@ struct AllLeagues: Decodable{
 }
 
 struct League: Decodable {
-    let idLeague : String
-    let strSport : String
-    let strLeague : String
-    let strCountry : String
-    let strYoutube : String
-    let strBadge : String
+    var idLeague : String?
+    var strSport : String?
+    var strLeague : String?
+    var strCountry : String?
+    var strYoutube : String?
+    var strBadge : String?
     
    /* enum CodingKeys: String, CodingKey{
         case idLeague = "idLeague"

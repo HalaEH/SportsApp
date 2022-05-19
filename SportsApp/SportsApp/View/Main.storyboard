@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yda-ff-2ug">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fzQ-oE-8Eg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -89,7 +89,7 @@
             </objects>
             <point key="canvasLocation" x="125" y="-638"/>
         </scene>
-        <!--Favorite View Controller-->
+        <!--Favorites-->
         <scene sceneID="uzg-Qy-ebR">
             <objects>
                 <viewController id="eX8-Z6-fPT" customClass="FavoriteViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -101,7 +101,7 @@
                                 <rect key="frame" x="-20" y="39" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="100" id="y48-r5-Jkt" customClass="FavoriteTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="100" id="y48-r5-Jkt" customClass="FavTableViewCell" customModule="SportsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y48-r5-Jkt" id="Kzd-25-EeB">
@@ -143,9 +143,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="favBtn" destination="FAN-hV-5D0" id="vMk-Rk-XEc"/>
-                                            <outlet property="favImg" destination="9Q3-bZ-aL2" id="htc-bN-dwR"/>
-                                            <outlet property="favLeagueNameLbl" destination="ef9-0q-0gP" id="Mkm-So-Xpe"/>
+                                            <outlet property="favLeagueImg" destination="9Q3-bZ-aL2" id="hIg-le-3hw"/>
+                                            <outlet property="favLeagueNameLbl" destination="ef9-0q-0gP" id="g3u-t5-kF6"/>
+                                            <outlet property="favYoutubeBtn" destination="FAN-hV-5D0" id="eCK-co-Rx1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -160,13 +160,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UDG-Ur-Ycf"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="heart" catalog="system" id="Hsy-pu-QSO"/>
                     <connections>
                         <outlet property="myTable" destination="wQk-xY-hLh" id="ZRB-kA-tKw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdP-UH-yyi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111.59420289855073" y="16.741071428571427"/>
+            <point key="canvasLocation" x="-1375" y="48"/>
         </scene>
         <!--Leagues Details View Controller-->
         <scene sceneID="cUj-Z1-goi">
@@ -528,10 +529,11 @@
             </objects>
             <point key="canvasLocation" x="-613" y="-638"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="SMw-PQ-Ht9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yda-ff-2ug" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="j08-oE-k9q"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LhR-8W-vRi">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -546,11 +548,30 @@
             </objects>
             <point key="canvasLocation" x="-1375" y="-638"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="pKu-HT-KxH">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="fzQ-oE-8Eg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Fwa-OR-oHK">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Yda-ff-2ug" kind="relationship" relationship="viewControllers" id="scC-JR-gK9"/>
+                        <segue destination="eX8-Z6-fPT" kind="relationship" relationship="viewControllers" id="OZZ-RH-7HV"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JeN-Fn-SGo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2488" y="-247"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="facebook-2" width="512" height="512"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="house" catalog="system" width="128" height="110"/>
         <image name="instagram-2" width="512" height="512"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <image name="twitter-2" width="512" height="512"/>

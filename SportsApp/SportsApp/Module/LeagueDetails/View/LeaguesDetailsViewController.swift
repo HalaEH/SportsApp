@@ -55,7 +55,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
         presenter.attatchView(view: self)
         presenter.getAllTeams()
         //presenter.getUpcomingEvents()
-        presenter.leagueMatches(idLeague: selectedLeague!.idLeague)
+        presenter.leagueMatches(idLeague: selectedLeague!.idLeague!)
         
         handleBack()
         setUpFav()

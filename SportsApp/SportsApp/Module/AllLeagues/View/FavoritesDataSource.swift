@@ -12,7 +12,7 @@ import UIKit
 
 protocol favLeagueProtocol {
     func saveLeague(league: League)
-    func getFavs()
+    func getFavs()  -> [NSManagedObject]
     func deleteLeague(league: League)
 }
 
@@ -26,9 +26,16 @@ class FavoritesDataSource: favLeagueProtocol{
         managedContext = appDelegate.persistentContainer.viewContext
     }
     
-    func getFavs() {
-            let savedLeagues = self.getSavedLeagues("FavLeague")
-        
+    private let concurrentFavQueue = DispatchQueue(label: "favQueue",attributes: .concurrent)
+    
+    func getFavs()  -> [NSManagedObject]{
+        var savedLeagues: [NSManagedObject] = []
+        concurrentFavQueue.async(flags: .barrier){[weak self] in
+            guard let self = self else {return}
+            savedLeagues = self.getSavedLeagues("FavLeague")
+            print(savedLeagues)
+        }
+        return savedLeagues;
     }
     
     func saveLeague(league: League) {
@@ -53,7 +60,7 @@ class FavoritesDataSource: favLeagueProtocol{
         do{
             if let mContext = self.managedContext{
                 let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavLeague")
-                fetchRequest.predicate = NSPredicate(format: "idLeague == %@", league.idLeague.description ?? "")
+                fetchRequest.predicate = NSPredicate(format: "idLeague == %@", league.idLeague?.description ?? "")
                 let result = try mContext.fetch(fetchRequest)
                 mContext.delete((result as! [NSManagedObject]).first!)
                 try self.managedContext?.save()
@@ -64,12 +71,13 @@ class FavoritesDataSource: favLeagueProtocol{
     }
     
     
-    private func getSavedLeagues(_ entity: String) -> [NSManagedObject]{
+     func getSavedLeagues(_ entity: String) -> [NSManagedObject]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         do{
             if let mContext = managedContext{
                 let results = try mContext.fetch(fetchRequest) as? [NSManagedObject]
                 if let savedLeagues = results{
+                    print("SAVED")
                     return savedLeagues
                 }
             }

@@ -23,7 +23,13 @@ class FavoritesPresenter{
     }
     
     func getFavLeagues(){
-        dataSource?.getFavs()
+       // let savedLeagues = self.getSavedLeagues("FavLeague")
+        let result = dataSource?.getSavedLeagues("FavLeague")
+        DispatchQueue.main.async {
+            self.view.stopAnimating()
+            self.view.updateUI(leagues: result! )
+            print(result)
+        }
     }
     
 }

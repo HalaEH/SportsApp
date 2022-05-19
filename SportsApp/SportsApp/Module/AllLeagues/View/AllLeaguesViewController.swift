@@ -61,7 +61,7 @@ class AllLeaguesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AllLeaguesTableViewCell
         let league = leaguesArray[indexPath.row]
         cell.leagueNameLbl.text = league.strLeague
-        let url = URL(string: league.strBadge)
+        let url = URL(string: league.strBadge!)
         cell.leagueImg.kf.setImage(with: url)
         cell.youtubeBtn.tag = indexPath.row
         cell.youtubeBtn.addTarget(self, action: #selector(buttonAction(sender:)), for: UIControl.Event.touchUpInside)

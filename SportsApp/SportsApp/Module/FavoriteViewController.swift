@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import CoreData
 import Kingfisher
 
 protocol FavLeaguesProtocol : AnyObject{
     func stopAnimating()
-    func updateUI(leagues: [League])
+    func updateUI(leagues: [NSManagedObject])
 }
 
 class FavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var myTable: UITableView!
-    var leaguesArray = [League]()
+    var leaguesArray: [NSManagedObject]?
     let indicator = UIActivityIndicatorView(style: .large)
     var presenter : FavoritesPresenter!
     var selectedLeague: League!
@@ -29,6 +30,8 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         myTable.delegate = self
         myTable.dataSource = self
         
+        leaguesArray = []
+        
         indicator.center = self.view.center
         self.view.addSubview(indicator)
         indicator.startAnimating()
@@ -37,7 +40,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         presenter.attachView(view: self)
         presenter.getFavLeagues()
         
-        let tap = UIGestureRecognizer(target: self, action: #selector(goBack))
     }
     
     @objc func goBack(){
@@ -52,19 +54,22 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("rows")
+        print(self.leaguesArray?.count)
         // #warning Incomplete implementation, return the number of rows
-        return leaguesArray.count ?? 0
+        return self.leaguesArray?.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavoriteTableViewCell
-        let league = leaguesArray[indexPath.row]
-        cell.favLeagueNameLbl.text = league.strLeague
-        let url = URL(string: league.strBadge)
-        cell.favImg .kf.setImage(with: url)
-        cell.favBtn.tag = indexPath.row
-        cell.favBtn.addTarget(self, action: #selector(buttonAction(sender:)), for: UIControl.Event.touchUpInside)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavTableViewCell
+        let league = leaguesArray?[indexPath.row]
+        cell.favLeagueNameLbl.text = leaguesArray?[indexPath.row].value(forKey: "strLeague") as? String ?? ""
+        print("leaguename")
+        let url = URL(string: league?.value(forKey: "strBadge") as? String ?? "")
+        cell.favLeagueImg.kf.setImage(with: url)
+        cell.favYoutubeBtn.tag = indexPath.row
+        cell.favYoutubeBtn.addTarget(self, action: #selector(buttonAction(sender:)), for: UIControl.Event.touchUpInside)
         
         return cell
     }
@@ -75,10 +80,17 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var selectedLeague: League = League()
+        selectedLeague.idLeague = leaguesArray?[indexPath.row].value(forKey: "idLeague") as? String
+        selectedLeague.strLeague = leaguesArray?[indexPath.row].value(forKey: "strLeague") as? String
+        selectedLeague.strCountry = leaguesArray?[indexPath.row].value(forKey: "strCountry") as? String
+        selectedLeague.strSport = leaguesArray?[indexPath.row].value(forKey: "strSport") as? String
+        selectedLeague.strYoutube = leaguesArray?[indexPath.row].value(forKey: "strYoutube") as? String
+        
         let main = UIStoryboard(name: "Main", bundle: nil)
         let leagueDetails = main.instantiateViewController(identifier: "leagueDetailsVC") as LeaguesDetailsViewController
         leagueDetails.modalPresentationStyle = .fullScreen
-        leagueDetails.selectedLeague = leaguesArray[indexPath.row]
+        leagueDetails.selectedLeague = selectedLeague
         self.present(leagueDetails, animated: true, completion: nil)
         
         /*leagueDetails.sportName = leaguesArray[indexPath.row].strSport
@@ -86,8 +98,8 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    @objc func buttonAction(sender: UIButton){
-        let url = NSURL(string:"https://\(leaguesArray[sender.tag].strYoutube ?? "")")! as URL
+   @objc func buttonAction(sender: UIButton){
+        let url = NSURL(string:"https://\(leaguesArray?[sender.tag].value(forKey: "strYoutube") ?? "")")! as URL
         if UIApplication.shared.canOpenURL(url){
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else{
@@ -96,14 +108,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
     
     /*
      // Override to support editing the table view.
@@ -116,41 +120,17 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
      }
      }
      */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+  
 }
 
 extension FavoriteViewController : FavLeaguesProtocol {
     func stopAnimating() {
         indicator.stopAnimating()
-        // presenter.result
     }
-    func updateUI(leagues: [League]){
+    func updateUI(leagues: [NSManagedObject]){
         leaguesArray = leagues
+        print("updateUI")
+        print(leagues.count)
         self.myTable.reloadData()
     }
 }
