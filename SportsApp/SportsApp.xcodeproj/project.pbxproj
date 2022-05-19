@@ -11,6 +11,7 @@
 		6B137E48282F3C66009249A9 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B137E47282F3C66009249A9 /* EndPoint.swift */; };
 		6B32520728352DBC008917D6 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B32520628352DBC008917D6 /* FavoriteViewController.swift */; };
 		6B32520928352E50008917D6 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B32520828352E50008917D6 /* FavoriteTableViewCell.swift */; };
+		6B40477C2836AA2F009EF2B9 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40477B2836AA2F009EF2B9 /* FavoritesPresenter.swift */; };
 		6B5CA74F28315963008FB9EC /* twitter.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6B5CA74E28315962008FB9EC /* twitter.jpeg */; };
 		6B5CA7512831598E008FB9EC /* youtube.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6B5CA7502831598E008FB9EC /* youtube.jpeg */; };
 		6B5CA75328315997008FB9EC /* instagram.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6B5CA75228315997008FB9EC /* instagram.jpeg */; };
@@ -73,6 +74,7 @@
 		6B137E47282F3C66009249A9 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		6B32520628352DBC008917D6 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		6B32520828352E50008917D6 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteTableViewCell.swift; path = /Users/halaemad/Documents/GitHub/SportsApp/SportsApp/SportsApp/Module/FavoriteTableViewCell.swift; sourceTree = "<absolute>"; };
+		6B40477B2836AA2F009EF2B9 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		6B5CA74E28315962008FB9EC /* twitter.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twitter.jpeg; sourceTree = "<group>"; };
 		6B5CA7502831598E008FB9EC /* youtube.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = youtube.jpeg; sourceTree = "<group>"; };
 		6B5CA75228315997008FB9EC /* instagram.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpeg; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 		6B8D05F4282E9C0100ECB284 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				6B40477B2836AA2F009EF2B9 /* FavoritesPresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				8F079979282E96F800690A58 /* LeaguesDetailsModel.swift in Sources */,
 				8FCE15472833277200681443 /* TeamCell.swift in Sources */,
 				6B137E48282F3C66009249A9 /* EndPoint.swift in Sources */,
+				6B40477C2836AA2F009EF2B9 /* FavoritesPresenter.swift in Sources */,
 				8F07995A282E8FC000690A58 /* ViewController.swift in Sources */,
 				8F079975282E96A500690A58 /* AllLeaguesPresenter.swift in Sources */,
 				8F3798382833FDE700DC4182 /* LatestCell.swift in Sources */,
