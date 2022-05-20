@@ -80,31 +80,51 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var selectedLeague: League = League()
-        selectedLeague.idLeague = leaguesArray?[indexPath.row].value(forKey: "idLeague") as? String
-        selectedLeague.strLeague = leaguesArray?[indexPath.row].value(forKey: "strLeague") as? String
-        selectedLeague.strCountry = leaguesArray?[indexPath.row].value(forKey: "strCountry") as? String
-        selectedLeague.strSport = leaguesArray?[indexPath.row].value(forKey: "strSport") as? String
-        selectedLeague.strYoutube = leaguesArray?[indexPath.row].value(forKey: "strYoutube") as? String
+        if Connectivity.isNetworkReachable(){
+            var selectedLeague: League = League()
+            selectedLeague.idLeague = leaguesArray?[indexPath.row].value(forKey: "idLeague") as? String
+            selectedLeague.strLeague = leaguesArray?[indexPath.row].value(forKey: "strLeague") as? String
+            selectedLeague.strCountry = leaguesArray?[indexPath.row].value(forKey: "strCountry") as? String
+            selectedLeague.strSport = leaguesArray?[indexPath.row].value(forKey: "strSport") as? String
+            selectedLeague.strYoutube = leaguesArray?[indexPath.row].value(forKey: "strYoutube") as? String
+            
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            let leagueDetails = main.instantiateViewController(identifier: "leagueDetailsVC") as LeaguesDetailsViewController
+            leagueDetails.modalPresentationStyle = .fullScreen
+            leagueDetails.selectedLeague = selectedLeague
+            self.present(leagueDetails, animated: true, completion: nil)
+        }
+        else{
+            showAlert(title: "Connection Alert", message: "There is no connection. Please check your connection and try again")
+        }
         
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let leagueDetails = main.instantiateViewController(identifier: "leagueDetailsVC") as LeaguesDetailsViewController
-        leagueDetails.modalPresentationStyle = .fullScreen
-        leagueDetails.selectedLeague = selectedLeague
-        self.present(leagueDetails, animated: true, completion: nil)
+        
         
         /*leagueDetails.sportName = leaguesArray[indexPath.row].strSport
          navigationController?.pushViewController(leagueDetails, animated: true)*/
     }
-    
-    
-   @objc func buttonAction(sender: UIButton){
-        let url = NSURL(string:"https://\(leaguesArray?[sender.tag].value(forKey: "strYoutube") ?? "")")! as URL
-        if UIApplication.shared.canOpenURL(url){
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else{
-            //alert no connection
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    @objc func buttonAction(sender: UIButton){
+        if Connectivity.isNetworkReachable(){
+            let url = NSURL(string:"https://\(leaguesArray?[sender.tag].value(forKey: "strYoutube") ?? "")")! as URL
+            if UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else{
+                showAlert(title: "Alert", message: "Can't reach channel")
+                
+            }
+        }        else{
+            showAlert(title: "Connection Alert", message: "There is no connection. Please check your connection and try again")
+        }
+        
     }
     
     
@@ -120,7 +140,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
      }
      }
      */
-  
+    
 }
 
 extension FavoriteViewController : FavLeaguesProtocol {

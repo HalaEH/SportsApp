@@ -30,7 +30,13 @@ class AllSportsViewController: UICollectionViewController, UICollectionViewDeleg
         presenter = AllSportsPresenter(NWService: NetworkService())
         presenter.attachView(view: self)
         
-        presenter.getItems()
+        if Connectivity.isNetworkReachable(){
+            presenter.getItems()
+
+        }
+        else{
+            showAlert(title: "Connection Alert", message: "There is no connection. Please check your connection and try again")
+        }
     }
     
   
@@ -45,7 +51,14 @@ class AllSportsViewController: UICollectionViewController, UICollectionViewDeleg
      */
     
     // MARK: UICollectionViewDataSource
-    
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1

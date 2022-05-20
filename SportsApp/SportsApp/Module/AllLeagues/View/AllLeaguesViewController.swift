@@ -41,23 +41,23 @@ class AllLeaguesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func goBack(){
-          self.dismiss(animated: true, completion: nil)
-      }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Table view data source
     
-     func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return leaguesArray.count ?? 0
     }
     
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AllLeaguesTableViewCell
         let league = leaguesArray[indexPath.row]
         cell.leagueNameLbl.text = league.strLeague
@@ -74,27 +74,41 @@ class AllLeaguesViewController: UIViewController, UITableViewDelegate, UITableVi
         return 200
     }
     
-   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let leagueDetails = main.instantiateViewController(identifier: "leagueDetailsVC") as LeaguesDetailsViewController
         leagueDetails.modalPresentationStyle = .fullScreen
-    leagueDetails.selectedLeague = leaguesArray[indexPath.row]
+        leagueDetails.selectedLeague = leaguesArray[indexPath.row]
         self.present(leagueDetails, animated: true, completion: nil)
-
+        
         /*leagueDetails.sportName = leaguesArray[indexPath.row].strSport
-        navigationController?.pushViewController(leagueDetails, animated: true)*/
+         navigationController?.pushViewController(leagueDetails, animated: true)*/
     }
-
-     
-     
-
+    
+    
+    
+    
     
     @objc func buttonAction(sender: UIButton){
-        let url = NSURL(string:"https://\(leaguesArray[sender.tag].strYoutube ?? "")")! as URL
-        if UIApplication.shared.canOpenURL(url){
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else{
-            //alert no connection
+        if Connectivity.isNetworkReachable(){
+            let url = NSURL(string:"https://\(leaguesArray[sender.tag].strYoutube ?? "")")! as URL
+            if UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else{
+                showAlert(title: "Alert", message: "Can't reach channel")
+            }
+        }
+        else{
+            showAlert(title: "Connection Alert", message: "There is no connection. Please check your connection and try again")
+        }
+        
+    }
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
