@@ -129,17 +129,27 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     
-    /*
+    
      // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        var selectedLeague: League = League()
+        selectedLeague.idLeague = leaguesArray?[indexPath.row].value(forKey: "idLeague") as? String
+        selectedLeague.strLeague = leaguesArray?[indexPath.row].value(forKey: "strLeague") as? String
+        selectedLeague.strCountry = leaguesArray?[indexPath.row].value(forKey: "strCountry") as? String
+        selectedLeague.strSport = leaguesArray?[indexPath.row].value(forKey: "strSport") as? String
+        selectedLeague.strYoutube = leaguesArray?[indexPath.row].value(forKey: "strYoutube") as? String
+        
+         if editingStyle == .delete {
+         // Delete the row from the data source
+            presenter.deleteLeague(league: selectedLeague)
+            leaguesArray!.remove(at: indexPath.row)
+
+            tableView.deleteRows(at: [indexPath], with: .fade)
+         }
      }
-     }
-     */
+     
+
     
 }
 

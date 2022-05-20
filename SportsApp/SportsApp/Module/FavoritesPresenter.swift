@@ -32,4 +32,8 @@ class FavoritesPresenter{
         }
     }
     
+    func deleteLeague(league: League){
+        dataSource?.deleteLeague(league: league)
+    }
+    
 }
