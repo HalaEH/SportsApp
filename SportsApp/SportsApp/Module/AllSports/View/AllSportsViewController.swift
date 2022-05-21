@@ -16,13 +16,14 @@ protocol AllSportsProtocol : AnyObject{
 
 class AllSportsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    
     var sportsArray = [Sport]()
     let indicator = UIActivityIndicatorView(style: .large)
     var presenter : AllSportsPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         indicator.center = self.view.center
         self.view.addSubview(indicator)
         indicator.startAnimating()

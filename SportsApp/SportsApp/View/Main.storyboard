@@ -469,7 +469,7 @@
         <!--All Sports-->
         <scene sceneID="sIo-Ce-ci3">
             <objects>
-                <collectionViewController id="VO0-EQ-kdK" customClass="AllSportsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="all" id="VO0-EQ-kdK" customClass="AllSportsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dSm-7h-yEp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -548,12 +548,13 @@
             </objects>
             <point key="canvasLocation" x="-1375" y="-638"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Controller-->
         <scene sceneID="pKu-HT-KxH">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="fzQ-oE-8Eg" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="start" automaticallyAdjustsScrollViewInsets="NO" id="fzQ-oE-8Eg" customClass="TabController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Fwa-OR-oHK">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
