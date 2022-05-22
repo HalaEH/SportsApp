@@ -39,27 +39,23 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         presenter = FavoritesPresenter()
         presenter.attachView(view: self)
         presenter.getFavLeagues()
+        myTable.reloadData()
         
     }
-    
-    @objc func goBack(){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Table view data source
+        
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("rows")
-        print(self.leaguesArray?.count)
-        // #warning Incomplete implementation, return the number of rows
         return self.leaguesArray?.count ?? 0
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.getFavLeagues()
+        self.myTable.deselectRow(at: myTable.indexPathForSelectedRow ?? IndexPath(row: 0, section: 0), animated: true)
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavTableViewCell
@@ -98,10 +94,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
             showAlert(title: "Connection Alert", message: "There is no connection. Please check your connection and try again")
         }
         
-        
-        
-        /*leagueDetails.sportName = leaguesArray[indexPath.row].strSport
-         navigationController?.pushViewController(leagueDetails, animated: true)*/
     }
     func showAlert(title: String, message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -127,10 +119,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    
-    
-    
-     // Override to support editing the table view.
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         var selectedLeague: League = League()
@@ -144,11 +132,10 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
          // Delete the row from the data source
             presenter.deleteLeague(league: selectedLeague)
             leaguesArray!.remove(at: indexPath.row)
-
             tableView.deleteRows(at: [indexPath], with: .fade)
          }
      }
-     
+         
 
     
 }
@@ -159,8 +146,7 @@ extension FavoriteViewController : FavLeaguesProtocol {
     }
     func updateUI(leagues: [NSManagedObject]){
         leaguesArray = leagues
-        print("updateUI")
-        print(leagues.count)
         self.myTable.reloadData()
+
     }
 }

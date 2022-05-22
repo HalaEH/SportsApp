@@ -33,7 +33,6 @@ class FavoritesDataSource: favLeagueProtocol{
         concurrentFavQueue.async(flags: .barrier){[weak self] in
             guard let self = self else {return}
             savedLeagues = self.getSavedLeagues("FavLeague")
-            print(savedLeagues)
         }
         return savedLeagues;
     }
@@ -92,10 +91,8 @@ class FavoritesDataSource: favLeagueProtocol{
         do{
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavLeague")
             fetchRequest.predicate = NSPredicate(format: "idLeague == %@", leagueId)
-            print("leagueid:  \(leagueId)")
             if let mContext = self.managedContext{
                 let result = try mContext.fetch(fetchRequest)
-                print("result: \(result)")
                 if result.count>0{
                     return true
                 }

@@ -156,18 +156,14 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     
     @IBAction func addToFav(_ sender: Any) {
-        print("btn")
         print(selectedLeague?.idLeague)
         if(!(presenter?.isFav(leagueId: selectedLeague?.idLeague ?? "0"))!){
             favBtn.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
-            print("add")
             presenter.addToFavs(league: selectedLeague!)
         }else{
             favBtn.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
             presenter.deleteFromFavs(league: selectedLeague!)
-            print("remove")
         }
-        
     }
     
 }
@@ -185,9 +181,8 @@ extension LeaguesDetailsViewController: LeagueDetailsProtocol{
         upcomingEvents = presenter.upcomingEvents
         upComingCV.reloadData()
         latestCV.reloadData()
-        //print(upcomingEvents)
-        
     }
+    
     func fillMatchesData(){
         leagueMatches = presenter.matches
         latestCV.reloadData()

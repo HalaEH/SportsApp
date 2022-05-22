@@ -28,7 +28,6 @@ class FavoritesPresenter{
         DispatchQueue.main.async {
             self.view.stopAnimating()
             self.view.updateUI(leagues: result! )
-            print(result)
         }
     }
     

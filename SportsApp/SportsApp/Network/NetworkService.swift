@@ -30,9 +30,7 @@ class NetworkService: ApiProtocol{
                 print("sucess")
                 guard let AllSportData = response.value
                     else {return}
-       //         print(AllSportData.sports)
                 completion(AllSportData,nil)
-         //       print(AllSportData.sports)
             
             case .failure(let error):
                 print("fail")
@@ -47,7 +45,6 @@ class NetworkService: ApiProtocol{
         AF.request(path).validate().responseDecodable(of: AllEvents.self) { (response) in
             switch response.result {
             case .success( _):
-                //print("sucess")
                 guard let upcomingEvents = response.value
                     else {return}
                 completion(upcomingEvents,nil)
@@ -65,7 +62,6 @@ class NetworkService: ApiProtocol{
         AF.request(path).validate().responseDecodable(of: AllEvents.self) { (response) in
             switch response.result {
             case .success( _):
-                //print("sucess")
                 guard let upcomingEvents = response.value
                     else {return}
                 completion(upcomingEvents,nil)
@@ -79,19 +75,6 @@ class NetworkService: ApiProtocol{
     }
     
       static func getAllLeagues(sport: String,completion : @escaping (AllLeagues, Error?)->Void) {
-     //     let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
-
-         /* let param: Parameters = ["s": "Soccer"]
-          AF.request("https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php", method: .get, parameters: param, encoding: URLEncoding.queryString).validate()
-              .responseDecodable(of: AllLeagues.self) {
-                  (response) in
-                  guard let sportsResponse = response.value?.countries else{
-                      print("else")
-                      return
-                  }
-                  print(sportsResponse.count)
-                  print("end")
-          }*/
          let path = "\(baseUrl)\(EndPoints.allLeagues(sport: sport).path)"
 
                  AF.request(path).validate().responseDecodable(of: AllLeagues.self) { (response) in
@@ -119,9 +102,7 @@ class NetworkService: ApiProtocol{
                 print("sucess")
                 guard let LeaguesData = response.value
                     else {return}
-         //       print(LeaguesData.events)
                 completion(LeaguesData,nil)
-       //         print(LeaguesData.events)
                 
             case .failure(let error):
                 print("fail")
@@ -140,12 +121,9 @@ class NetworkService: ApiProtocol{
         AF.request(path).validate().responseDecodable(of: TeamDetails.self) { (response) in
             switch response.result {
             case .success( _):
-                //print("sucess")
                 guard let TeamsData = response.value
                     else {return}
-     //           print(TeamsData.teams[0].facebook)
                 completion(TeamsData,nil)
-                //print(TeamsData.teams)
                 
             case .failure(let error):
                 print("fail")
