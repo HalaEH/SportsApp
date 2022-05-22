@@ -5,7 +5,7 @@ IOS Mobile Application that displays collection of sports with list of leagues t
  Swift programming
 
 ## using: 
-MVP architectural design pattern
-Alamofire 
-Kingfisher
-CoreData.
+- MVP architectural design pattern
+- Alamofire 
+- Kingfisher
+- CoreData.
