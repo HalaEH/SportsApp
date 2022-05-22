@@ -58,7 +58,7 @@ class SportsAppTests: XCTestCase {
     //All teams
     func testFetchTeamsFromRemote(){
           let expectationOject = expectation(description: "Waiting for the response")
-        NetworkService.getTeamDetails(leagueName: "English%20Premier%20League"){ (result, error)  -> Void in
+        NetworkService.getAllTeams(leagueName: "English%20Premier%20League"){ (result, error)  -> Void in
         
             guard let teams = (result as? TeamDetails)?.teams else{
                   XCTFail()

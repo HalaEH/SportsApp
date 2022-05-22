@@ -21,9 +21,9 @@ class LeagueDetailsPresenter{
     func attatchView(view:LeagueDetailsProtocol){
         self.view = view
     }
-    
-    func getAllTeams(){
-        NetworkService.getTeamDetails(leagueName: "English%20Premier%20League") { [weak self] (allTeams, nil) in
+    //"English%20Premier%20League"
+    func getAllTeams(league: String){
+        NetworkService.getAllTeams(leagueName: league) { [weak self] (allTeams, nil) in
             self?.allTeams = allTeams?.teams
             DispatchQueue.main.async {
                 self?.view.fillTeamsData()

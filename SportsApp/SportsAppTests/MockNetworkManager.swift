@@ -46,24 +46,44 @@ class MockNetworkManager{
 extension MockNetworkManager {
    
    
-//    func getSports(urlID: Int, paramerters: [String : String], complitionHandler: @escaping (Any?, Error?, Bool) -> Void) {
-//        switch(urlID){
-//        case 0:
-//            do{
-//                let json = Data(mockSportsItemsJSONResponse.utf8)
-//                let result = try JSONDecoder().decode(AllSports.self, from: json)
-//                if(shouldReturnError){
-//                    complitionHandler(nil, ResponseWithError.responseError as? Error, false)
-//                }else{
-//                    complitionHandler(result, nil,false)
-//                }
-//            }catch{
-//                print("Error occured in casting response to AllSports")
-//            }
-//
-//        default:
-//            break;
-//
-//        }
-//    }
+    func getSports(urlID: Int, paramerters: [String : String], complitionHandler: @escaping (Any?, Error?, Bool) -> Void) {
+        switch(urlID){
+        case 0:
+            do{
+                let json = Data(mockSportsItemsJSONResponse.utf8)
+                let result = try JSONDecoder().decode(AllSports.self, from: json)
+                if(shouldReturnError){
+                    complitionHandler(nil, ResponseWithError.responseError as? Error, false)
+                }else{
+                    complitionHandler(result, nil,false)
+                }
+            }catch{
+                print("Error occured in casting response to AllSports")
+            }
+
+        default:
+            break;
+
+        }
+    }
+    /*func getLeagues(urlID: Int, paramerters: [String : String], complitionHandler: @escaping (Any?, Error?, Bool) -> Void) {
+        switch(urlID){
+        case 0:
+            do{
+                let json = Data(mockSportsItemsJSONResponse.utf8)
+                let result = try JSONDecoder().decode(AllLeagues.self, from: json)
+                if(shouldReturnError){
+                    complitionHandler(nil, ResponseWithError.responseError as? Error, false)
+                }else{
+                    complitionHandler(result, nil,false)
+                }
+            }catch{
+                print("Error occured in casting response to AllSports")
+            }
+
+        default:
+            break;
+
+        }
+    }*/
 }

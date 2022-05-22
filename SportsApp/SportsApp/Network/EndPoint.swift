@@ -23,7 +23,7 @@ enum EndPoints {
         case .allSports:
             return "/all_sports.php"
         case .allLeagues(let sport):
-            return "/search_all_leagues.php?s=\(sport)"
+            return "/search_all_leagues.php?s=\(sport)&c=England"
         case .leagueDetails(let league, let sport):
             return "/eventsseason.php?id=\(league)&s=\(sport)"
         case .allTeams(let leagueStr):

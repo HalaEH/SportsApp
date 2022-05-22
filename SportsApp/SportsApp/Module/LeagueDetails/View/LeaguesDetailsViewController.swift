@@ -53,7 +53,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
         
         presenter = LeagueDetailsPresenter(NWService: NetworkService())
         presenter.attatchView(view: self)
-        presenter.getAllTeams()
+        presenter.getAllTeams(league:"English%20Premier%20League")
         //presenter.getUpcomingEvents()
         presenter.leagueMatches(idLeague: selectedLeague!.idLeague!)
         
@@ -111,7 +111,7 @@ class LeaguesDetailsViewController: UIViewController, UICollectionViewDelegate, 
             cell.latestImage.kf.setImage(with: url)
             cell.latestImage.layer.cornerRadius = 15
             cell.latestImage.layer.masksToBounds = true
-            
+            cell.result.text = "\(event.intHomeScore ?? "1") : \(event.intAwayScore ?? "0")"
             return cell
         }
         let team : Team = teams[indexPath.row]

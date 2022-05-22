@@ -19,7 +19,7 @@ class TeamDetailsPresenter{
     }
     
     func getAllTeams(){
-        NetworkService.getTeamDetails(leagueName: "English%20Premier%20League") { [weak self] (allTeams, nil) in
+        NetworkService.getAllTeams(leagueName: "English%20Premier%20League") { [weak self] (allTeams, nil) in
             self?.allTeams = allTeams?.teams
             DispatchQueue.main.async {
                 self?.view.setUpUI()

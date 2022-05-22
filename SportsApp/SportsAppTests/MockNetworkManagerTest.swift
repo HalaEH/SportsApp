@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SportsApp
+@testable import SportsApp
 
 class MockNetworkManagerTest: XCTestCase {
 
@@ -21,13 +21,22 @@ class MockNetworkManagerTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-   func testFetchSportsList(){
+   func testFetchSports(){
         myMock.getSports(urlID: 0, paramerters: [:]) { (sports, error, isNull) in
             guard let sports = (sports as? AllSports)?.sports else{
                 XCTFail()
                 return
             }
-            XCTAssertEqual(sports.count, 30, "failed")
+            XCTAssertEqual(sports.count, 34, "failed")
         }
     }
+    /*func testFetchLeagues(){
+         myMock.getLeagues(urlID: 0, paramerters: [:]) { (leagues, error, isNull) in
+            guard let leagues = (leagues as? AllLeagues)?.countries else{
+                 XCTFail()
+                 return
+             }
+             XCTAssertEqual(leagues.count, 10, "failed")
+         }
+     }*/
 }

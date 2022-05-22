@@ -14,7 +14,7 @@ protocol ApiProtocol {
     static func getUpComing(completion: @escaping (AllEvents?, Error?)->Void)
     static func getAllLeagues(sport: String,completion: @escaping (AllLeagues, Error?)->Void)
     static func getLeagueDetails(endPoint: EndPoints,completion: @escaping (LeagueDetails?, Error?)->Void)
-    static func getTeamDetails(leagueName: String, completion: @escaping (TeamDetails?, Error?)->Void)
+    static func getAllTeams(leagueName: String, completion: @escaping (TeamDetails?, Error?)->Void)
 }
 
 
@@ -114,7 +114,7 @@ class NetworkService: ApiProtocol{
         }
     }
     
-    static func getTeamDetails(leagueName: String, completion : @escaping (TeamDetails?, Error?)->Void) {
+    static func getAllTeams(leagueName: String, completion : @escaping (TeamDetails?, Error?)->Void) {
         let path = "\(baseUrl)\(EndPoints.teamDetails(leagueStr: leagueName).path)"
         
 

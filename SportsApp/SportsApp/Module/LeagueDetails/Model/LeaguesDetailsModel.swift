@@ -62,8 +62,8 @@ struct Event : Decodable{
     let strSeason: String
     let strHomeTeam :  String
     let strAwayTeam : String
-    //let intHomeScore : String
-    //let intAwayScore : String
+    let intHomeScore : String?
+    let intAwayScore : String?
     let strTimestamp: String
     let dateEvent:String
     //let dateEventLocal:String
